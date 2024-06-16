@@ -1,6 +1,7 @@
 ﻿
 
-using Microsoft.Data.SqlClient;
+using System.Data.SqlClient;
+using System;
 using System.Configuration;
 using System.Data;
 
@@ -8,11 +9,11 @@ namespace DAL
 {
     public class Helper : IDisposable
     {
-        SqlConnection? cn;
-        SqlCommand? cmd;
+        SqlConnection cn;
+        SqlCommand cmd;
         string cstr = ConfigurationManager.ConnectionStrings["cstr"].ConnectionString;
 
-        private static Helper? helper;
+        private static Helper helper;
 
         private Helper() { }
 
@@ -43,7 +44,7 @@ namespace DAL
             }
         }
 
-        public int ExecuteNonQuery(string cmdtext, SqlParameter[]? p = null)
+        public int ExecuteNonQuery(string cmdtext, SqlParameter[] p = null)
         {
             try
             {
@@ -70,7 +71,7 @@ namespace DAL
             }
         }
 
-        public SqlDataReader ExecuteReader(string cmdtext, SqlParameter[]? p = null)
+        public SqlDataReader ExecuteReader(string cmdtext, SqlParameter[] p = null)
         {
             try
             {

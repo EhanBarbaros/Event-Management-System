@@ -93,6 +93,12 @@
     <Compile Include="AnaSayfa.Designer.cs">
       <DependentUpon>AnaSayfa.cs</DependentUpon>
     </Compile>
+    <Compile Include="EtkinlikOlustur.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EtkinlikOlustur.Designer.cs">
+      <DependentUpon>EtkinlikOlustur.cs</DependentUpon>
+    </Compile>
     <Compile Include="GirisYap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnaSayfa.resx">
       <DependentUpon>AnaSayfa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EtkinlikOlustur.resx">
+      <DependentUpon>EtkinlikOlustur.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GirisYap.resx">
       <DependentUpon>GirisYap.cs</DependentUpon>
@@ -139,16 +148,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAL\DAL.csproj">
-      <Project>{3df65025-37e4-47fb-8d49-1698a9ca9e17}</Project>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{5c632c95-debd-42c5-bfbf-6c803df814d7}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eTDFAS\EtkinlikYS.BLL.csproj">
-      <Project>{f0432ab8-3399-4f42-86ce-60bfa67a367c}</Project>
+    <ProjectReference Include="..\EtkinlikYS.BLL\EtkinlikYS.BLL.csproj">
+      <Project>{82eafbe2-6ed5-44e3-8b78-50efc4f51a15}</Project>
       <Name>EtkinlikYS.BLL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FGFF\EtkinlikYS.Model.csproj">
-      <Project>{0bf42706-0df4-4212-b70f-8ddb9f321f58}</Project>
+    <ProjectReference Include="..\EtkinlikYS.Model\EtkinlikYS.Model.csproj">
+      <Project>{45c20035-d678-4c73-8613-7327ea476796}</Project>
       <Name>EtkinlikYS.Model</Name>
     </ProjectReference>
   </ItemGroup>

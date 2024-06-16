@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EtkinlikYS.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,8 +13,6 @@ namespace EtkinlikYonetimSistemi
 {
     public partial class form_ilk : Form
     {
-        //Kapama butonu nesnesi tanımlandı.
-        private Button closeButton;
         public form_ilk()
         {
             InitializeComponent();
@@ -28,11 +27,27 @@ namespace EtkinlikYonetimSistemi
 
         private void btn_GirisYap_Click(object sender, EventArgs e)
         {
-            Form frm = new AnaSayfa();
-            frm.Show();
-            this.Hide();
+            try
+            {
+                var kbl = new KullaniciBL();
+                var kullanici = kbl.KullaniciBul(txt_kullaniciAdi.Text.Trim(), txt_sifre.Text.Trim());
 
-            frm.FormClosed += (s, args) => this.Close();
+                if (kullanici != null)
+                {
+                    AnaSayfa anaSayfa = new AnaSayfa(kullanici);
+                    this.Hide();
+                    anaSayfa.ShowDialog();
+                    this.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Kullanıcı adı veya şifre yanlış.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message);
+            }
         }
 
         private void btn_GirisFormKayitOl_Click(object sender, EventArgs e)

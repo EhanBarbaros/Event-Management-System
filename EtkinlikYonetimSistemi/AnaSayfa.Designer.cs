@@ -10,7 +10,7 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, bool."></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_kullaniciAdi = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Etkinliklerim = new System.Windows.Forms.Button();
+            this.btn_EtkinlikOlustur = new System.Windows.Forms.Button();
             this.lbl_baslik = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -51,12 +51,11 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.lbl_kullaniciAdi);
             this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.button2);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.btn_Etkinliklerim);
+            this.panel1.Controls.Add(this.btn_EtkinlikOlustur);
             this.panel1.Controls.Add(this.lbl_baslik);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -65,34 +64,25 @@
             this.panel1.Size = new System.Drawing.Size(1117, 67);
             this.panel1.TabIndex = 2;
             // 
-            // label1
+            // lbl_kullaniciAdi
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(994, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Ertuğrul Han Barbaros";
+            this.lbl_kullaniciAdi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_kullaniciAdi.Location = new System.Drawing.Point(986, 18);
+            this.lbl_kullaniciAdi.Name = "lbl_kullaniciAdi";
+            this.lbl_kullaniciAdi.Size = new System.Drawing.Size(119, 24);
+            this.lbl_kullaniciAdi.TabIndex = 6;
+            this.lbl_kullaniciAdi.Text = "Ertuğrul Han Barbaros";
+            this.lbl_kullaniciAdi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(943, 15);
+            this.pictureBox1.Location = new System.Drawing.Point(944, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 33);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(819, 12);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(111, 37);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -103,23 +93,24 @@
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_Etkinliklerim
             // 
-            this.button2.Location = new System.Drawing.Point(559, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 37);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_Etkinliklerim.Location = new System.Drawing.Point(559, 12);
+            this.btn_Etkinliklerim.Name = "btn_Etkinliklerim";
+            this.btn_Etkinliklerim.Size = new System.Drawing.Size(111, 37);
+            this.btn_Etkinliklerim.TabIndex = 2;
+            this.btn_Etkinliklerim.Text = "Etkinliklerimi Yönet";
+            this.btn_Etkinliklerim.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btn_EtkinlikOlustur
             // 
-            this.button1.Location = new System.Drawing.Point(429, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 37);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_EtkinlikOlustur.Location = new System.Drawing.Point(429, 12);
+            this.btn_EtkinlikOlustur.Name = "btn_EtkinlikOlustur";
+            this.btn_EtkinlikOlustur.Size = new System.Drawing.Size(111, 37);
+            this.btn_EtkinlikOlustur.TabIndex = 1;
+            this.btn_EtkinlikOlustur.Text = "Etkinlik Oluştur";
+            this.btn_EtkinlikOlustur.UseVisualStyleBackColor = true;
+            this.btn_EtkinlikOlustur.Click += new System.EventHandler(this.btn_EtkinlikOlustur_Click);
             // 
             // lbl_baslik
             // 
@@ -133,12 +124,21 @@
             this.lbl_baslik.TabIndex = 0;
             this.lbl_baslik.Text = "ETKİNLİK YÖNETİM SİSTEMİ";
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 67);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1117, 476);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
             // AnaSayfa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1117, 543);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AnaSayfa";
@@ -154,11 +154,11 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbl_baslik;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_kullaniciAdi;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Etkinliklerim;
+        private System.Windows.Forms.Button btn_EtkinlikOlustur;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1; // Yeni eklenen FlowLayoutPanel
     }
 }

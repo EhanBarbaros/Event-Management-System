@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EtkinlikYS.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,19 +13,18 @@ namespace EtkinlikYonetimSistemi
 {
     public partial class AnaSayfa : Form
     {
-        public AnaSayfa()
+        private Kullanici _kullanici;
+        public AnaSayfa(Kullanici kullanici)
         {
             InitializeComponent();
+            _kullanici = kullanici;
+            lbl_kullaniciAdi.Text = _kullanici.KullaniciAdi;
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void btn_EtkinlikOlustur_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
+            EtkinlikOlustur etkinlikOlusturForm = new EtkinlikOlustur(_kullanici);
+            etkinlikOlusturForm.ShowDialog();
         }
     }
 }
