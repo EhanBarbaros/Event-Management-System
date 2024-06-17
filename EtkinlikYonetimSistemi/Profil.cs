@@ -18,6 +18,7 @@ namespace EtkinlikYonetimSistemi
             _kullanici = kullanici;
             _kullaniciBL = new KullaniciBL();
             ProfilBilgileriniYukle();
+            StartPosition = FormStartPosition.CenterParent;
         }
 
         private void ProfilBilgileriniYukle()
@@ -30,9 +31,10 @@ namespace EtkinlikYonetimSistemi
             lblDTarihi.Text = "Doğum Tarihi: " + _kullanici.DTarihi;
             lblCinsiyet.Text = "Cinsiyet: " + _kullanici.Cinsiyet;
 
-            if (_kullanici.ProfilFotografi != null)
+            if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
             {
                 pictureBoxProfil.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
+                pictureBoxProfil.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
 
@@ -56,13 +58,23 @@ namespace EtkinlikYonetimSistemi
             if (pictureBoxProfil.Image != null)
             {
                 _kullanici.ProfilFotografi = ImageToByteArray(pictureBoxProfil.Image);
-                _kullaniciBL.KullaniciGuncelle(_kullanici);
-                MessageBox.Show("Profil fotoğrafı başarıyla güncellendi.");
+                if (_kullaniciBL.KullaniciGuncelle(_kullanici))
+                {
+                    MessageBox.Show("Profil fotoğrafı başarıyla güncellendi.");
+                    this.DialogResult = DialogResult.OK;
+                }
+                else
+                {
+                    MessageBox.Show("Profil güncelleme sırasında bir hata oluştu.");
+                }
+
             }
             else
             {
                 MessageBox.Show("Lütfen bir resim yükleyin.");
             }
+
+
         }
 
         private byte[] ImageToByteArray(Image image)

@@ -19,12 +19,7 @@ namespace EtkinlikYonetimSistemi
         {
             InitializeComponent();
             _kullanici = kullanici;
-            lbl_kullaniciAdi.Text = _kullanici.KullaniciAdi;
-            if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
-            {
-                pictureBox1.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            }
+            UpdateUserInfo();
         }
 
         private void lbl_kullaniciAdi_Click(object sender, EventArgs e)
@@ -42,7 +37,10 @@ namespace EtkinlikYonetimSistemi
         private void btnProfilAyarları_Click(object sender, EventArgs e)
         {
             Profil profil = new Profil(_kullanici);
-            profil.ShowDialog();
+            if (profil.ShowDialog() == DialogResult.OK)
+            {
+                UpdateUserInfo();
+            }
         }
 
         private void btnCikisYap_Click(object sender, EventArgs e)
@@ -61,6 +59,16 @@ namespace EtkinlikYonetimSistemi
             using (var ms = new MemoryStream(byteArray))
             {
                 return Image.FromStream(ms);
+            }
+        }
+
+        private void UpdateUserInfo()
+        {
+            lbl_kullaniciAdi.Text = _kullanici.KullaniciAdi;
+            if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
+            {
+                pictureBox1.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; 
             }
         }
     }
