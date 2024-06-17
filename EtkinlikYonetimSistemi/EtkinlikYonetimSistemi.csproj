@@ -48,6 +48,9 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="6.0.1" />
+    <PackageReference Include="System.Drawing.Common">
+      <Version>8.0.6</Version>
+    </PackageReference>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
     <PackageReference Include="System.IO.FileSystem.AccessControl" Version="5.0.0" />
     <PackageReference Include="System.Memory" Version="4.5.4" />
@@ -92,6 +95,12 @@
     </Compile>
     <Compile Include="AnaSayfa.Designer.cs">
       <DependentUpon>AnaSayfa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EtkinlikKarti.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EtkinlikKarti.Designer.cs">
+      <DependentUpon>EtkinlikKarti.cs</DependentUpon>
     </Compile>
     <Compile Include="EtkinlikOlustur.cs">
       <SubType>Form</SubType>
@@ -181,6 +190,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="defaultpp.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="defaultEtkinlik.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

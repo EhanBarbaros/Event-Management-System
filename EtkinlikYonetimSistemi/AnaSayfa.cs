@@ -1,14 +1,7 @@
 ﻿using EtkinlikYS.BLL;
 using EtkinlikYS.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EtkinlikYonetimSistemi
@@ -17,6 +10,7 @@ namespace EtkinlikYonetimSistemi
     {
         private Kullanici _kullanici;
         private EtkinlikBL _etkinlikBL;
+
         public AnaSayfa(Kullanici kullanici)
         {
             InitializeComponent();
@@ -29,56 +23,16 @@ namespace EtkinlikYonetimSistemi
 
         private void LoadEtkinlikler()
         {
+            flowLayoutPanel1.Controls.Clear();
             var etkinlikler = _etkinlikBL.EtkinlikleriGetir();
 
             foreach (var etkinlik in etkinlikler)
             {
-                var etkinlikPanel = CreateEtkinlikPanel(etkinlik);
-                flowLayoutPanel1.Controls.Add(etkinlikPanel);
+                EtkinlikKarti etkinlikKarti = new EtkinlikKarti();
+                etkinlikKarti.SetEtkinlikBilgileri(etkinlik.EtkinlikAdi, etkinlik.Fiyat, etkinlik.ToplamKontejan.ToString(), etkinlik.MevcutKontejan.ToString(), etkinlik.EtkinlikTuru, etkinlik.Resim);
+                flowLayoutPanel1.Controls.Add(etkinlikKarti);
             }
         }
-
-        private Panel CreateEtkinlikPanel(Etkinlik etkinlik)
-        {
-            var panel = new Panel
-            {
-                Size = new Size(350, 400),
-                BorderStyle = BorderStyle.FixedSingle,
-                Margin = new Padding(15),
-                BackColor = Color.LightBlue
-            };
-
-            var lblEtkinlikAdi = new Label
-            {
-                Text = etkinlik.EtkinlikAdi,
-                Font = new Font("Arial", 14, FontStyle.Bold),
-                Dock = DockStyle.Top,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-
-            var picEtkinlik = new PictureBox
-            {
-                Size = new Size(330, 200),
-                Image = etkinlik.Resim != null ? ByteArrayToImage(etkinlik.Resim) : null,
-                SizeMode = PictureBoxSizeMode.StretchImage,
-                Dock = DockStyle.Top,
-                Margin = new Padding(10)
-            };
-
-            var lblEtkinlikBilgi = new Label
-            {
-                Text = $"Fiyat: {etkinlik.Fiyat}\nTarih: {etkinlik.EtkinlikTarihi.ToShortDateString()}\nYeri: {etkinlik.EtkinlikYeri}",
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.MiddleLeft
-            };
-
-            panel.Controls.Add(lblEtkinlikBilgi);
-            panel.Controls.Add(picEtkinlik);
-            panel.Controls.Add(lblEtkinlikAdi);
-
-            return panel;
-        }
-
 
         private void UpdateProfilePicturePosition()
         {
@@ -93,7 +47,6 @@ namespace EtkinlikYonetimSistemi
         {
             profilMenu.Show(lbl_kullaniciAdi, new Point(0, lbl_kullaniciAdi.Height));
         }
-
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
@@ -118,16 +71,18 @@ namespace EtkinlikYonetimSistemi
         private void btn_EtkinlikOlustur_Click(object sender, EventArgs e)
         {
             EtkinlikOlustur etkinlikOlusturForm = new EtkinlikOlustur(_kullanici);
+            etkinlikOlusturForm.FormClosed += EtkinlikOlusturForm_FormClosed;
             etkinlikOlusturForm.ShowDialog();
         }
-        private void EtkinlikOlusturForm_FormClosing(object sender, FormClosedEventArgs e)
+
+        private void EtkinlikOlusturForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             LoadEtkinlikler();
         }
 
         private Image ByteArrayToImage(byte[] byteArray)
         {
-            using (var ms = new MemoryStream(byteArray))
+            using (var ms = new System.IO.MemoryStream(byteArray))
             {
                 return Image.FromStream(ms);
             }
@@ -139,7 +94,7 @@ namespace EtkinlikYonetimSistemi
             if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
             {
                 pictureBox1.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; 
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
         }
     }

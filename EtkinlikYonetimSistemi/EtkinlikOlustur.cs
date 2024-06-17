@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,15 +17,52 @@ namespace EtkinlikYonetimSistemi
     public partial class EtkinlikOlustur : Form
     {
         private Kullanici _kullanici;
+        private EtkinlikBL _etkinlikBL;
+        private byte[] _selectedImage;
         public EtkinlikOlustur(Kullanici kullanici)
         {
             InitializeComponent();
             _kullanici = kullanici;
+            _etkinlikBL = new EtkinlikBL();
+            _selectedImage = null;
 
         }
 
+        public byte[] GetDefaultImage()
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            using (var stream = assembly.GetManifestResourceStream("EtkinlikYonetimSistemi.defaultEtkinlik.jpg"))
+            {
+                if (stream == null)
+                {
+                    return null;
+                }
+                using (var ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    return ms.ToArray();
+                }
+            }
+        }
+
+
         private void btnAddEvent_Click(object sender, EventArgs e)
         {
+            byte[] imageToSave;
+            if (_selectedImage != null)
+            {
+                imageToSave = _selectedImage;
+            }
+            else
+            {
+                imageToSave = GetDefaultImage();
+                if (imageToSave == null)
+                {
+                    MessageBox.Show("Default resim yüklenemedi. Lütfen bir resim seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
             try
             {
                 Etkinlik yeniEtkinlik = new Etkinlik
@@ -37,16 +75,14 @@ namespace EtkinlikYonetimSistemi
                     EtkinlikTarihi = dtpEventDate.Value,
                     EtkinlikYeri = txtEventLocation.Text,
                     Aciklama = txtDescription.Text,
-                    Resim = pictureBox.Image != null ? ImageToByteArray(pictureBox.Image) : null,
+                    Resim = imageToSave,
                     OlusturanKullaniciID = (int)_kullanici.Kullaniciid
                 };
 
-                EtkinlikBL etkinlikBL = new EtkinlikBL();
-                bool isAdded = etkinlikBL.EtkinlikKayit(yeniEtkinlik);
-                if (isAdded == true)
+                bool isAdded = _etkinlikBL.EtkinlikKayit(yeniEtkinlik);
+                if (isAdded)
                 {
                     MessageBox.Show("Etkinlik başarıyla eklendi!");
-
                     this.Close();
                 }
                 else
@@ -59,21 +95,28 @@ namespace EtkinlikYonetimSistemi
                 MessageBox.Show("Bir hata oluştu: " + ex.Message);
             }
         }
+
         private void btnUploadImage_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                Image image = Image.FromFile(openFileDialog.FileName);
-                pictureBox.Image = image;
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    _selectedImage = File.ReadAllBytes(openFileDialog.FileName);
+                    pictureBox.Image = Image.FromFile(openFileDialog.FileName);
+                }
             }
         }
 
-        private byte[] ImageToByteArray(Image image)
+        private Image ByteArrayToImage(byte[] byteArray)
         {
-            using (var ms = new MemoryStream())
+            if (byteArray == null)
+                return null;
+
+            using (var ms = new MemoryStream(byteArray))
             {
-                image.Save(ms, image.RawFormat);
-                return ms.ToArray();
+                return Image.FromStream(ms);
             }
         }
     }
