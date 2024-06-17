@@ -46,6 +46,7 @@ namespace EtkinlikYonetimSistemi
                 if (isAdded == true)
                 {
                     MessageBox.Show("Etkinlik başarıyla eklendi!");
+
                     this.Close();
                 }
                 else

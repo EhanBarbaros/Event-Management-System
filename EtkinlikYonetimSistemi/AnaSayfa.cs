@@ -1,4 +1,5 @@
-﻿using EtkinlikYS.Model;
+﻿using EtkinlikYS.BLL;
+using EtkinlikYS.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,70 @@ namespace EtkinlikYonetimSistemi
     public partial class AnaSayfa : Form
     {
         private Kullanici _kullanici;
+        private EtkinlikBL _etkinlikBL;
         public AnaSayfa(Kullanici kullanici)
         {
             InitializeComponent();
             _kullanici = kullanici;
+            _etkinlikBL = new EtkinlikBL();
+            LoadEtkinlikler();
             UpdateUserInfo();
             UpdateProfilePicturePosition();
         }
+
+        private void LoadEtkinlikler()
+        {
+            var etkinlikler = _etkinlikBL.EtkinlikleriGetir();
+
+            foreach (var etkinlik in etkinlikler)
+            {
+                var etkinlikPanel = CreateEtkinlikPanel(etkinlik);
+                flowLayoutPanel1.Controls.Add(etkinlikPanel);
+            }
+        }
+
+        private Panel CreateEtkinlikPanel(Etkinlik etkinlik)
+        {
+            var panel = new Panel
+            {
+                Size = new Size(350, 400),
+                BorderStyle = BorderStyle.FixedSingle,
+                Margin = new Padding(15),
+                BackColor = Color.LightBlue
+            };
+
+            var lblEtkinlikAdi = new Label
+            {
+                Text = etkinlik.EtkinlikAdi,
+                Font = new Font("Arial", 14, FontStyle.Bold),
+                Dock = DockStyle.Top,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            var picEtkinlik = new PictureBox
+            {
+                Size = new Size(330, 200),
+                Image = etkinlik.Resim != null ? ByteArrayToImage(etkinlik.Resim) : null,
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                Dock = DockStyle.Top,
+                Margin = new Padding(10)
+            };
+
+            var lblEtkinlikBilgi = new Label
+            {
+                Text = $"Fiyat: {etkinlik.Fiyat}\nTarih: {etkinlik.EtkinlikTarihi.ToShortDateString()}\nYeri: {etkinlik.EtkinlikYeri}",
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            panel.Controls.Add(lblEtkinlikBilgi);
+            panel.Controls.Add(picEtkinlik);
+            panel.Controls.Add(lblEtkinlikAdi);
+
+            return panel;
+        }
+
+
         private void UpdateProfilePicturePosition()
         {
             lbl_kullaniciAdi.AutoSize = true;
@@ -61,6 +119,10 @@ namespace EtkinlikYonetimSistemi
         {
             EtkinlikOlustur etkinlikOlusturForm = new EtkinlikOlustur(_kullanici);
             etkinlikOlusturForm.ShowDialog();
+        }
+        private void EtkinlikOlusturForm_FormClosing(object sender, FormClosedEventArgs e)
+        {
+            LoadEtkinlikler();
         }
 
         private Image ByteArrayToImage(byte[] byteArray)

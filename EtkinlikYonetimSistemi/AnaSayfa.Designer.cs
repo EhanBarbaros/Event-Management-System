@@ -1,4 +1,6 @@
-﻿namespace EtkinlikYonetimSistemi
+﻿using System.Windows.Forms;
+
+namespace EtkinlikYonetimSistemi
 {
     partial class AnaSayfa
     {
@@ -37,12 +39,14 @@
             this.btn_Etkinliklerim = new System.Windows.Forms.Button();
             this.btn_EtkinlikOlustur = new System.Windows.Forms.Button();
             this.lbl_baslik = new System.Windows.Forms.Label();
+            this.panelScroll = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.profilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.profilAyarlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cikisYapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelScroll.SuspendLayout();
             this.profilMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,15 +69,15 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1117, 67);
+            this.panel1.Size = new System.Drawing.Size(1280, 90);
             this.panel1.TabIndex = 2;
             // 
             // lbl_kullaniciAdi
             // 
             this.lbl_kullaniciAdi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_kullaniciAdi.Location = new System.Drawing.Point(0, 0);
+            this.lbl_kullaniciAdi.Location = new System.Drawing.Point(1130, 30);
             this.lbl_kullaniciAdi.Name = "lbl_kullaniciAdi";
-            this.lbl_kullaniciAdi.Size = new System.Drawing.Size(103, 23);
+            this.lbl_kullaniciAdi.Size = new System.Drawing.Size(125, 23);
             this.lbl_kullaniciAdi.TabIndex = 6;
             this.lbl_kullaniciAdi.Text = "Ertuğrul Han Barbaros";
             this.lbl_kullaniciAdi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -83,9 +87,9 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(1080, 25);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(44, 39);
+            this.pictureBox1.Size = new System.Drawing.Size(40, 40);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
@@ -130,13 +134,26 @@
             this.lbl_baslik.TabIndex = 0;
             this.lbl_baslik.Text = "ETKİNLİK YÖNETİM SİSTEMİ";
             // 
+            // panelScroll
+            // 
+            this.panelScroll.Controls.Add(this.flowLayoutPanel1);
+            this.panelScroll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelScroll.Location = new System.Drawing.Point(0, 90);
+            this.panelScroll.Name = "panelScroll";
+            this.panelScroll.Size = new System.Drawing.Size(1280, 660);
+            this.panelScroll.TabIndex = 3;
+            // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 67);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.LeftToRight;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1117, 476);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1280, 660);
+            this.flowLayoutPanel1.TabIndex = 0;
+            this.flowLayoutPanel1.WrapContents = true;
             // 
             // profilMenu
             // 
@@ -166,8 +183,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1117, 543);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1280, 750);
+            this.Controls.Add(this.panelScroll);
             this.Controls.Add(this.panel1);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AnaSayfa";
@@ -175,23 +192,26 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelScroll.ResumeLayout(false);
             this.profilMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lbl_baslik;
-        private System.Windows.Forms.Label lbl_kullaniciAdi;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button btn_Etkinliklerim;
-        private System.Windows.Forms.Button btn_EtkinlikOlustur;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1; // Yeni eklenen FlowLayoutPanel
-        private System.Windows.Forms.ContextMenuStrip profilMenu;
-        private System.Windows.Forms.ToolStripMenuItem profilAyarlarıToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cikisYapToolStripMenuItem;
+
+        private ContextMenuStrip contextMenuStrip1;
+        private Panel panel1;
+        private Label lbl_baslik;
+        private Label lbl_kullaniciAdi;
+        private PictureBox pictureBox1;
+        private Button button3;
+        private Button btn_Etkinliklerim;
+        private Button btn_EtkinlikOlustur;
+        private Panel panelScroll;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private ContextMenuStrip profilMenu;
+        private ToolStripMenuItem profilAyarlarıToolStripMenuItem;
+        private ToolStripMenuItem cikisYapToolStripMenuItem;
     }
 }
