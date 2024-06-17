@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using EtkinlikYS.BLL;
 using EtkinlikYS.Model;
@@ -17,10 +19,27 @@ namespace EtkinlikYonetimSistemi
             this.Close();
         }
 
+        public byte[] GetDefaultProfileImage()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using (Stream stream = assembly.GetManifestResourceStream("EtkinlikYonetimSistemi.defaultpp.jpg"))
+            {
+                if (stream == null)
+                    return null;
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    return ms.ToArray();
+                }
+            }
+        }
+
         private void btn_KayitOl_Click(object sender, EventArgs e)
         {
             try
             {
+
                 if (txt_Sifre.Text.Trim() != txt_SifreTekrar.Text.Trim())
                 {
                     MessageBox.Show("Şifreler aynı değil. Lütfen tekrar deneyin.");
@@ -37,7 +56,9 @@ namespace EtkinlikYonetimSistemi
                     DTarihi = date_DogumT.Value.ToString("yyyy-MM-dd"),
                     Cinsiyet = radio_Erkek.Checked ? "Erkek" : "Kadın",
                     KullaniciAdi = txt_KullaniciAdi.Text.Trim(),
-                    Sifre = txt_Sifre.Text.Trim()
+                    Sifre = txt_Sifre.Text.Trim(),
+                    ProfilFotografi = GetDefaultProfileImage()
+
                 };
 
                 var kbl = new KullaniciBL();

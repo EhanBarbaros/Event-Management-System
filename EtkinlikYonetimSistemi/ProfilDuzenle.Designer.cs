@@ -15,15 +15,10 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.TextBox txtTelefon;
         private System.Windows.Forms.TextBox txtAdres;
-        private System.Windows.Forms.TextBox txtDTarihi;
-        private System.Windows.Forms.TextBox txtCinsiyet;
-        private System.Windows.Forms.TextBox txtEskiSifre;
-        private System.Windows.Forms.TextBox txtYeniSifre;
-        private System.Windows.Forms.TextBox txtYeniSifreTekrar;
-        private System.Windows.Forms.Label lblEskiSifre;
-        private System.Windows.Forms.Label lblYeniSifre;
-        private System.Windows.Forms.Label lblYeniSifreTekrar;
+        private System.Windows.Forms.DateTimePicker dtpDTarihi;
+        private System.Windows.Forms.ComboBox cmbCinsiyet;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSifreDegistir;
 
         protected override void Dispose(bool disposing)
         {
@@ -48,15 +43,10 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtTelefon = new System.Windows.Forms.TextBox();
             this.txtAdres = new System.Windows.Forms.TextBox();
-            this.txtDTarihi = new System.Windows.Forms.TextBox();
-            this.txtCinsiyet = new System.Windows.Forms.TextBox();
-            this.txtEskiSifre = new System.Windows.Forms.TextBox();
-            this.txtYeniSifre = new System.Windows.Forms.TextBox();
-            this.txtYeniSifreTekrar = new System.Windows.Forms.TextBox();
-            this.lblEskiSifre = new System.Windows.Forms.Label();
-            this.lblYeniSifre = new System.Windows.Forms.Label();
-            this.lblYeniSifreTekrar = new System.Windows.Forms.Label();
+            this.dtpDTarihi = new System.Windows.Forms.DateTimePicker();
+            this.cmbCinsiyet = new System.Windows.Forms.ComboBox();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnSifreDegistir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblAd
@@ -157,92 +147,54 @@
             this.txtAdres.Size = new System.Drawing.Size(150, 20);
             this.txtAdres.TabIndex = 11;
             // 
-            // txtDTarihi
+            // dtpDTarihi
             // 
-            this.txtDTarihi.Location = new System.Drawing.Point(119, 180);
-            this.txtDTarihi.Name = "txtDTarihi";
-            this.txtDTarihi.Size = new System.Drawing.Size(150, 20);
-            this.txtDTarihi.TabIndex = 12;
+            this.dtpDTarihi.Location = new System.Drawing.Point(119, 180);
+            this.dtpDTarihi.Name = "dtpDTarihi";
+            this.dtpDTarihi.Size = new System.Drawing.Size(150, 20);
+            this.dtpDTarihi.TabIndex = 12;
             // 
-            // txtCinsiyet
+            // cmbCinsiyet
             // 
-            this.txtCinsiyet.Location = new System.Drawing.Point(119, 206);
-            this.txtCinsiyet.Name = "txtCinsiyet";
-            this.txtCinsiyet.Size = new System.Drawing.Size(150, 20);
-            this.txtCinsiyet.TabIndex = 13;
-            // 
-            // txtEskiSifre
-            // 
-            this.txtEskiSifre.Location = new System.Drawing.Point(119, 237);
-            this.txtEskiSifre.Name = "txtEskiSifre";
-            this.txtEskiSifre.Size = new System.Drawing.Size(150, 20);
-            this.txtEskiSifre.TabIndex = 14;
-            // 
-            // txtYeniSifre
-            // 
-            this.txtYeniSifre.Location = new System.Drawing.Point(119, 267);
-            this.txtYeniSifre.Name = "txtYeniSifre";
-            this.txtYeniSifre.Size = new System.Drawing.Size(150, 20);
-            this.txtYeniSifre.TabIndex = 15;
-            // 
-            // txtYeniSifreTekrar
-            // 
-            this.txtYeniSifreTekrar.Location = new System.Drawing.Point(119, 297);
-            this.txtYeniSifreTekrar.Name = "txtYeniSifreTekrar";
-            this.txtYeniSifreTekrar.Size = new System.Drawing.Size(150, 20);
-            this.txtYeniSifreTekrar.TabIndex = 16;
-            // 
-            // lblEskiSifre
-            // 
-            this.lblEskiSifre.AutoSize = true;
-            this.lblEskiSifre.Location = new System.Drawing.Point(30, 240);
-            this.lblEskiSifre.Name = "lblEskiSifre";
-            this.lblEskiSifre.Size = new System.Drawing.Size(54, 13);
-            this.lblEskiSifre.TabIndex = 17;
-            this.lblEskiSifre.Text = "Eski Şifre:";
-            // 
-            // lblYeniSifre
-            // 
-            this.lblYeniSifre.AutoSize = true;
-            this.lblYeniSifre.Location = new System.Drawing.Point(30, 270);
-            this.lblYeniSifre.Name = "lblYeniSifre";
-            this.lblYeniSifre.Size = new System.Drawing.Size(55, 13);
-            this.lblYeniSifre.TabIndex = 18;
-            this.lblYeniSifre.Text = "Yeni Şifre:";
-            // 
-            // lblYeniSifreTekrar
-            // 
-            this.lblYeniSifreTekrar.AutoSize = true;
-            this.lblYeniSifreTekrar.Location = new System.Drawing.Point(30, 300);
-            this.lblYeniSifreTekrar.Name = "lblYeniSifreTekrar";
-            this.lblYeniSifreTekrar.Size = new System.Drawing.Size(89, 13);
-            this.lblYeniSifreTekrar.TabIndex = 19;
-            this.lblYeniSifreTekrar.Text = "Yeni Şifre Tekrar:";
+            this.cmbCinsiyet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCinsiyet.FormattingEnabled = true;
+            this.cmbCinsiyet.Items.AddRange(new object[] {
+            "Erkek",
+            "Kadın"});
+            this.cmbCinsiyet.Location = new System.Drawing.Point(119, 210);
+            this.cmbCinsiyet.Name = "cmbCinsiyet";
+            this.cmbCinsiyet.Size = new System.Drawing.Size(150, 21);
+            this.cmbCinsiyet.TabIndex = 13;
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(100, 330);
+            this.btnSave.Location = new System.Drawing.Point(100, 240);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(150, 23);
-            this.btnSave.TabIndex = 20;
+            this.btnSave.TabIndex = 14;
             this.btnSave.Text = "Kaydet";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnSifreDegistir
+            // 
+            this.btnSifreDegistir.Location = new System.Drawing.Point(100, 270);
+            this.btnSifreDegistir.Name = "btnSifreDegistir";
+            this.btnSifreDegistir.Size = new System.Drawing.Size(150, 23);
+            this.btnSifreDegistir.TabIndex = 15;
+            this.btnSifreDegistir.Text = "Şifre Değiştir";
+            this.btnSifreDegistir.UseVisualStyleBackColor = true;
+            this.btnSifreDegistir.Click += new System.EventHandler(this.btnSifreDegistir_Click);
             // 
             // ProfilDuzenle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 358);
+            this.ClientSize = new System.Drawing.Size(337, 308);
+            this.Controls.Add(this.btnSifreDegistir);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.lblYeniSifreTekrar);
-            this.Controls.Add(this.lblYeniSifre);
-            this.Controls.Add(this.lblEskiSifre);
-            this.Controls.Add(this.txtYeniSifreTekrar);
-            this.Controls.Add(this.txtYeniSifre);
-            this.Controls.Add(this.txtEskiSifre);
-            this.Controls.Add(this.txtCinsiyet);
-            this.Controls.Add(this.txtDTarihi);
+            this.Controls.Add(this.cmbCinsiyet);
+            this.Controls.Add(this.dtpDTarihi);
             this.Controls.Add(this.txtAdres);
             this.Controls.Add(this.txtTelefon);
             this.Controls.Add(this.txtEmail);
@@ -256,10 +208,10 @@
             this.Controls.Add(this.lblSoyad);
             this.Controls.Add(this.lblAd);
             this.Name = "ProfilDuzenle";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Profil Düzenle";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
     }
 }

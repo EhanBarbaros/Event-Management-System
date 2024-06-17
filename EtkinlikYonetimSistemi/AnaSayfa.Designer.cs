@@ -71,24 +71,24 @@
             // lbl_kullaniciAdi
             // 
             this.lbl_kullaniciAdi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_kullaniciAdi.Location = new System.Drawing.Point(986, 18);
+            this.lbl_kullaniciAdi.Location = new System.Drawing.Point(0, 0);
             this.lbl_kullaniciAdi.Name = "lbl_kullaniciAdi";
-            this.lbl_kullaniciAdi.Size = new System.Drawing.Size(119, 24);
+            this.lbl_kullaniciAdi.Size = new System.Drawing.Size(103, 23);
             this.lbl_kullaniciAdi.TabIndex = 6;
             this.lbl_kullaniciAdi.Text = "Ertuğrul Han Barbaros";
             this.lbl_kullaniciAdi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbl_kullaniciAdi.Click += new System.EventHandler(this.lbl_kullaniciAdi_Click); // Olay işleyicisi ekleme
+            this.lbl_kullaniciAdi.Click += new System.EventHandler(this.lbl_kullaniciAdi_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.pictureBox1.Location = new System.Drawing.Point(944, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(36, 33);
+            this.pictureBox1.Size = new System.Drawing.Size(44, 39);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click); // Olay işleyicisi ekleme
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // button3
             // 
@@ -145,21 +145,21 @@
             this.profilAyarlarıToolStripMenuItem,
             this.cikisYapToolStripMenuItem});
             this.profilMenu.Name = "profilMenu";
-            this.profilMenu.Size = new System.Drawing.Size(148, 48);
+            this.profilMenu.Size = new System.Drawing.Size(146, 48);
             // 
             // profilAyarlarıToolStripMenuItem
             // 
             this.profilAyarlarıToolStripMenuItem.Name = "profilAyarlarıToolStripMenuItem";
-            this.profilAyarlarıToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.profilAyarlarıToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.profilAyarlarıToolStripMenuItem.Text = "Profil Ayarları";
-            this.profilAyarlarıToolStripMenuItem.Click += new System.EventHandler(this.btnProfilAyarları_Click); // Olay işleyicisi ekleme
+            this.profilAyarlarıToolStripMenuItem.Click += new System.EventHandler(this.btnProfilAyarları_Click);
             // 
             // cikisYapToolStripMenuItem
             // 
             this.cikisYapToolStripMenuItem.Name = "cikisYapToolStripMenuItem";
-            this.cikisYapToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.cikisYapToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.cikisYapToolStripMenuItem.Text = "Çıkış Yap";
-            this.cikisYapToolStripMenuItem.Click += new System.EventHandler(this.btnCikisYap_Click); // Olay işleyicisi ekleme
+            this.cikisYapToolStripMenuItem.Click += new System.EventHandler(this.btnCikisYap_Click);
             // 
             // AnaSayfa
             // 

@@ -4,27 +4,32 @@ using System;
 using System.Data.SqlClient;
 using static System.Net.Mime.MediaTypeNames;
 using System.IO;
+using System.Collections.Generic;
 
 namespace EtkinlikYS.BLL
 {
     public class KullaniciBL
     {
-        public bool KullaniciKayit(Kullanici user)
+        public bool KullaniciKayit(Kullanici kullanici)
         {
+            if (DateTime.TryParse(kullanici.DTarihi, out DateTime parsedDate))
+            {
+                kullanici.DTarihi = parsedDate.ToString("yyyy-MM-dd");
+            }
             try
             {
                 SqlParameter[] p = {
-                    new SqlParameter("@Ad", user.Ad ?? (object)DBNull.Value),
-                    new SqlParameter("@Soyad", user.Soyad ?? (object)DBNull.Value),
-                    new SqlParameter("@Email", user.Email ?? (object)DBNull.Value),
-                    new SqlParameter("@Telefon", user.Telefon ?? (object)DBNull.Value),
-                    new SqlParameter("@Adres", user.Adres ?? (object)DBNull.Value),
-                    new SqlParameter("@DTarihi", user.DTarihi ?? (object)DBNull.Value),
-                    new SqlParameter("@Cinsiyet", user.Cinsiyet ?? (object)DBNull.Value),
-                    new SqlParameter("@KullaniciAdi", user.KullaniciAdi ?? (object)DBNull.Value),
-                    new SqlParameter("@Sifre", user.Sifre ?? (object)DBNull.Value),
+                    new SqlParameter("@Ad", kullanici.Ad ?? (object)DBNull.Value),
+                    new SqlParameter("@Soyad", kullanici.Soyad ?? (object)DBNull.Value),
+                    new SqlParameter("@Email", kullanici.Email ?? (object)DBNull.Value),
+                    new SqlParameter("@Telefon", kullanici.Telefon ?? (object)DBNull.Value),
+                    new SqlParameter("@Adres", kullanici.Adres ?? (object)DBNull.Value),
+                    new SqlParameter("@DTarihi", kullanici.DTarihi ?? (object)DBNull.Value),
+                    new SqlParameter("@Cinsiyet", kullanici.Cinsiyet ?? (object)DBNull.Value),
+                    new SqlParameter("@KullaniciAdi", kullanici.KullaniciAdi ?? (object)DBNull.Value),
+                    new SqlParameter("@Sifre", kullanici.Sifre ?? (object)DBNull.Value),
                     new SqlParameter("@Yetki", "user"),
-                    new SqlParameter("@ProfilFotografi", user.ProfilFotografi ?? (object)DBNull.Value)
+                    new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
                 };
 
                 var hlp = Helper.SDP;
@@ -89,24 +94,48 @@ namespace EtkinlikYS.BLL
         }
 
 
-        public bool KullaniciGuncelle(Kullanici kullanici)
+        public bool KullaniciGuncelle(Kullanici kullanici, string eskiSifre = null, string yeniSifre = null)
         {
             try
             {
-                SqlParameter[] parameters = {
-                    new SqlParameter("@KullaniciId", kullanici.Kullaniciid),
-                    new SqlParameter("@Ad", kullanici.Ad ?? (object)DBNull.Value),
-                    new SqlParameter("@Soyad", kullanici.Soyad ?? (object)DBNull.Value),
-                    new SqlParameter("@Email", kullanici.Email ?? (object)DBNull.Value),
-                    new SqlParameter("@Telefon", kullanici.Telefon ?? (object)DBNull.Value),
-                    new SqlParameter("@Adres", kullanici.Adres ?? (object)DBNull.Value),
-                    new SqlParameter("@DTarihi", kullanici.DTarihi ?? (object)DBNull.Value),
-                    new SqlParameter("@Cinsiyet", kullanici.Cinsiyet ?? (object)DBNull.Value),
-                    new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
-                };
+                if (DateTime.TryParse(kullanici.DTarihi, out DateTime parsedDate))
+                {
+                    kullanici.DTarihi = parsedDate.ToString("yyyy-MM-dd");
+                }
 
-                var hlp = Helper.SDP;
-                return hlp.ExecuteNonQuery("UPDATE Kullanicilar SET Ad=@Ad, Soyad=@Soyad, Email=@Email, Telefon=@Telefon, Adres=@Adres, DogumTarihi=@DTarihi, Cinsiyet=@Cinsiyet, ProfilFotografi=@ProfilFotografi WHERE KullaniciId=@KullaniciId", parameters) > 0;
+                List<SqlParameter> parameters = new List<SqlParameter>
+        {
+            new SqlParameter("@KullaniciId", kullanici.Kullaniciid),
+            new SqlParameter("@Ad", kullanici.Ad ?? (object)DBNull.Value),
+            new SqlParameter("@Soyad", kullanici.Soyad ?? (object)DBNull.Value),
+            new SqlParameter("@Email", kullanici.Email ?? (object)DBNull.Value),
+            new SqlParameter("@Telefon", kullanici.Telefon ?? (object)DBNull.Value),
+            new SqlParameter("@Adres", kullanici.Adres ?? (object)DBNull.Value),
+            new SqlParameter("@DTarihi", kullanici.DTarihi ?? (object)DBNull.Value),
+            new SqlParameter("@Cinsiyet", kullanici.Cinsiyet ?? (object)DBNull.Value),
+            new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
+        };
+
+                string updateQuery = "UPDATE Kullanicilar SET Ad=@Ad, Soyad=@Soyad, Email=@Email, Telefon=@Telefon, Adres=@Adres, DogumTarihi=@DTarihi, Cinsiyet=@Cinsiyet, ProfilFotografi=@ProfilFotografi";
+
+                if (!string.IsNullOrEmpty(yeniSifre))
+                {
+                    if (string.IsNullOrEmpty(eskiSifre))
+                    {
+                        throw new Exception("Eski şifre girilmeden yeni şifre değiştirilemez.");
+                    }
+
+                    updateQuery += ", Sifre=@YeniSifre WHERE KullaniciId=@KullaniciId AND Sifre=@EskiSifre";
+                    parameters.Add(new SqlParameter("@EskiSifre", eskiSifre));
+                    parameters.Add(new SqlParameter("@YeniSifre", yeniSifre));
+                }
+                else
+                {
+                    updateQuery += " WHERE KullaniciId=@KullaniciId";
+                }
+
+                var helper = new Helper();
+                return helper.ExecuteNonQuery(updateQuery, parameters.ToArray()) > 0;
             }
             catch (SqlException ex)
             {
@@ -117,6 +146,7 @@ namespace EtkinlikYS.BLL
                 throw new Exception("Bir hata oluştu: " + ex.Message);
             }
         }
+
 
 
     }

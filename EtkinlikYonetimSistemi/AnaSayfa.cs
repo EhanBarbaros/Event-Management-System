@@ -20,6 +20,15 @@ namespace EtkinlikYonetimSistemi
             InitializeComponent();
             _kullanici = kullanici;
             UpdateUserInfo();
+            UpdateProfilePicturePosition();
+        }
+        private void UpdateProfilePicturePosition()
+        {
+            lbl_kullaniciAdi.AutoSize = true;
+            int labelWidth = lbl_kullaniciAdi.Width;
+            int pictureBoxHeight = pictureBox1.Height;
+            lbl_kullaniciAdi.Location = new Point(panel1.Width - labelWidth - pictureBox1.Width - 20, 20);
+            pictureBox1.Location = new Point(lbl_kullaniciAdi.Left - pictureBox1.Width - 5, lbl_kullaniciAdi.Top + (lbl_kullaniciAdi.Height - pictureBoxHeight) / 2);
         }
 
         private void lbl_kullaniciAdi_Click(object sender, EventArgs e)

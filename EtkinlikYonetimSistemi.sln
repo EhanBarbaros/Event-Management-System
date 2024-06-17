@@ -5,11 +5,16 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtkinlikYonetimSistemi", "EtkinlikYonetimSistemi\EtkinlikYonetimSistemi.csproj", "{CE3313DA-4077-4BF8-A57E-1541B7FEF787}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5C632C95-DEBD-42C5-BFBF-6C803DF814D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{5C632C95-DEBD-42C5-BFBF-6C803DF814D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtkinlikYS.Model", "EtkinlikYS.Model\EtkinlikYS.Model.csproj", "{45C20035-D678-4C73-8613-7327EA476796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtkinlikYS.Model", "EtkinlikYS.Model\EtkinlikYS.Model.csproj", "{45C20035-D678-4C73-8613-7327EA476796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EtkinlikYS.BLL", "EtkinlikYS.BLL\EtkinlikYS.BLL.csproj", "{82EAFBE2-6ED5-44E3-8B78-50EFC4F51A15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EtkinlikYS.BLL", "EtkinlikYS.BLL\EtkinlikYS.BLL.csproj", "{82EAFBE2-6ED5-44E3-8B78-50EFC4F51A15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5087C005-17DC-459C-8237-D079C6D27370}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\OneDrive\Desktop\defaultpp.jpg = ..\..\..\OneDrive\Desktop\defaultpp.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
