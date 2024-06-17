@@ -15,7 +15,7 @@ namespace DAL
 
         private static Helper helper;
 
-        private Helper() { }
+        public Helper() { }
 
         public static Helper SDP
         {

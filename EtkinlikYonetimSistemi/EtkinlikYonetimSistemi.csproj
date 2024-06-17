@@ -111,6 +111,18 @@
     <Compile Include="KayitOl.Designer.cs">
       <DependentUpon>KayitOl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Profil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Profil.Designer.cs">
+      <DependentUpon>Profil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfilDuzenle.Designer.cs">
+      <DependentUpon>ProfilDuzenle.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AnaSayfa.resx">
@@ -124,6 +136,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KayitOl.resx">
       <DependentUpon>KayitOl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Profil.resx">
+      <DependentUpon>Profil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProfilDuzenle.resx">
+      <DependentUpon>ProfilDuzenle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

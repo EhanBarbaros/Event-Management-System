@@ -2,6 +2,8 @@
 using EtkinlikYS.Model;
 using System;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace EtkinlikYS.BLL
 {
@@ -21,11 +23,12 @@ namespace EtkinlikYS.BLL
                     new SqlParameter("@Cinsiyet", user.Cinsiyet ?? (object)DBNull.Value),
                     new SqlParameter("@KullaniciAdi", user.KullaniciAdi ?? (object)DBNull.Value),
                     new SqlParameter("@Sifre", user.Sifre ?? (object)DBNull.Value),
-                    new SqlParameter("@Yetki", "user")
+                    new SqlParameter("@Yetki", "user"),
+                    new SqlParameter("@ProfilFotografi", user.ProfilFotografi ?? (object)DBNull.Value)
                 };
 
                 var hlp = Helper.SDP;
-                return hlp.ExecuteNonQuery("Insert into Kullanicilar (Ad, Soyad, Email, Telefon, Adres, DogumTarihi, Cinsiyet, KullaniciAdi, Sifre,Yetki) values (@Ad, @Soyad, @Email, @Telefon, @Adres, @DTarihi, @Cinsiyet, @KullaniciAdi, @Sifre,@Yetki)", p) > 0;
+                return hlp.ExecuteNonQuery("Insert into Kullanicilar (Ad, Soyad, Email, Telefon, Adres, DogumTarihi, Cinsiyet, KullaniciAdi, Sifre,Yetki,ProfilFotografi) values (@Ad, @Soyad, @Email, @Telefon, @Adres, @DTarihi, @Cinsiyet, @KullaniciAdi, @Sifre,@Yetki,@ProfilFotografi)", p) > 0;
             }
             catch (SqlException)
             {
@@ -64,7 +67,8 @@ namespace EtkinlikYS.BLL
                         Cinsiyet = dr["Cinsiyet"].ToString(),
                         KullaniciAdi = dr["KullaniciAdi"].ToString(),
                         Sifre = dr["Sifre"].ToString(),
-                        Yetki = dr["Yetki"].ToString()
+                        Yetki = dr["Yetki"].ToString(),
+                        ProfilFotografi = dr["ProfilFotografi"] as byte[]
                     };
                 }
                 dr.Close();
@@ -85,7 +89,34 @@ namespace EtkinlikYS.BLL
         }
 
 
+        public bool KullaniciGuncelle(Kullanici kullanici)
+        {
+            try
+            {
+                SqlParameter[] parameters = {
+                    new SqlParameter("@KullaniciId", kullanici.Kullaniciid),
+                    new SqlParameter("@Ad", kullanici.Ad ?? (object)DBNull.Value),
+                    new SqlParameter("@Soyad", kullanici.Soyad ?? (object)DBNull.Value),
+                    new SqlParameter("@Email", kullanici.Email ?? (object)DBNull.Value),
+                    new SqlParameter("@Telefon", kullanici.Telefon ?? (object)DBNull.Value),
+                    new SqlParameter("@Adres", kullanici.Adres ?? (object)DBNull.Value),
+                    new SqlParameter("@DTarihi", kullanici.DTarihi ?? (object)DBNull.Value),
+                    new SqlParameter("@Cinsiyet", kullanici.Cinsiyet ?? (object)DBNull.Value),
+                    new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
+                };
 
+                var hlp = Helper.SDP;
+                return hlp.ExecuteNonQuery("UPDATE Kullanicilar SET Ad=@Ad, Soyad=@Soyad, Email=@Email, Telefon=@Telefon, Adres=@Adres, DogumTarihi=@DTarihi, Cinsiyet=@Cinsiyet, ProfilFotografi=@ProfilFotografi WHERE KullaniciId=@KullaniciId", parameters) > 0;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+        }
 
 
     }

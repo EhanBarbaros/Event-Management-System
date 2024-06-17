@@ -2,15 +2,8 @@
 {
     partial class AnaSayfa
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, bool."></param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,12 +13,6 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -38,12 +25,12 @@
             this.btn_EtkinlikOlustur = new System.Windows.Forms.Button();
             this.lbl_baslik = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.profilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.profilAyarlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cikisYapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.profilMenu.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -77,18 +64,17 @@
             this.lbl_kullaniciAdi.TabIndex = 6;
             this.lbl_kullaniciAdi.Text = "Ertuğrul Han Barbaros";
             this.lbl_kullaniciAdi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lbl_kullaniciAdi.Click += new System.EventHandler(this.lbl_kullaniciAdi_Click); // Olay işleyicisi ekleme
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip2;
             this.pictureBox1.Location = new System.Drawing.Point(944, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(36, 33);
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click); // Olay işleyicisi ekleme
             // 
             // button3
             // 
@@ -138,28 +124,28 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1117, 476);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
-            // profilMenu
+            // contextMenuStrip2
             // 
-            this.profilMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.profilMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profilAyarlarıToolStripMenuItem,
             this.cikisYapToolStripMenuItem});
-            this.profilMenu.Name = "profilMenu";
-            this.profilMenu.Size = new System.Drawing.Size(148, 48);
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 70);
             // 
             // profilAyarlarıToolStripMenuItem
             // 
             this.profilAyarlarıToolStripMenuItem.Name = "profilAyarlarıToolStripMenuItem";
-            this.profilAyarlarıToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.profilAyarlarıToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.profilAyarlarıToolStripMenuItem.Text = "Profil Ayarları";
-            this.profilAyarlarıToolStripMenuItem.Click += new System.EventHandler(this.btnProfilAyarları_Click); // Olay işleyicisi ekleme
+            this.profilAyarlarıToolStripMenuItem.Click += new System.EventHandler(this.btnProfilAyarları_Click);
             // 
             // cikisYapToolStripMenuItem
             // 
             this.cikisYapToolStripMenuItem.Name = "cikisYapToolStripMenuItem";
-            this.cikisYapToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
+            this.cikisYapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.cikisYapToolStripMenuItem.Text = "Çıkış Yap";
-            this.cikisYapToolStripMenuItem.Click += new System.EventHandler(this.btnCikisYap_Click); // Olay işleyicisi ekleme
+            this.cikisYapToolStripMenuItem.Click += new System.EventHandler(this.btnCikisYap_Click);
             // 
             // AnaSayfa
             // 
@@ -175,12 +161,11 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.profilMenu.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
-        #endregion
+#endregion
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbl_baslik;
@@ -190,7 +175,7 @@
         private System.Windows.Forms.Button btn_Etkinliklerim;
         private System.Windows.Forms.Button btn_EtkinlikOlustur;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1; // Yeni eklenen FlowLayoutPanel
-        private System.Windows.Forms.ContextMenuStrip profilMenu;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem profilAyarlarıToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cikisYapToolStripMenuItem;
     }
