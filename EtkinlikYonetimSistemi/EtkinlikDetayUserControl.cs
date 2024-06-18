@@ -14,6 +14,7 @@ namespace EtkinlikYonetimSistemi
             InitializeComponent();
             _etkinlik = etkinlik;
             LoadEtkinlikDetay();
+
         }
         private void LoadEtkinlikDetay()
         {
@@ -24,7 +25,7 @@ namespace EtkinlikYonetimSistemi
             lblMevcutKontejan.Text = $"Mevcut Katılımcı: {_etkinlik.MevcutKontejan.ToString()}";
             lblEtkinlikTarihi.Text = $"Etkinlik Tarihi: {_etkinlik.EtkinlikTarihi.ToShortDateString()}";
             lblEtkinlikYeri.Text = $"Etkinlik Adresi: {_etkinlik.EtkinlikYeri}";
-            lblAciklama.Text = $"Açıklama: {_etkinlik.Aciklama}";
+            txtAciklama.Text = _etkinlik.Aciklama;
 
             if (_etkinlik.Resim != null)
             {
