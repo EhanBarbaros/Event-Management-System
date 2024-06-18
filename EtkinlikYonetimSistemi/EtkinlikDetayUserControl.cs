@@ -47,7 +47,8 @@ namespace EtkinlikYonetimSistemi
             Form guncelleForm = new Form
             {
                 Size = new Size(400, 700),
-                Text = "Etkinlik Güncelle"
+                Text = "Etkinlik Güncelle",
+                TopMost = true
             };
             guncelleForm.Controls.Add(etkinlikGuncelleUC);
             etkinlikGuncelleUC.Dock = DockStyle.Fill;
