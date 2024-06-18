@@ -166,6 +166,8 @@
             this.Controls.Add(this.txtAciklama);
             this.Name = "EtkinlikDetayUserControl";
             this.Size = new System.Drawing.Size(650, 450);
+            this.MaximumSize = new System.Drawing.Size(650, 450);
+            this.MinimumSize = new System.Drawing.Size(650, 450);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxResim)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -17,5 +17,7 @@ namespace EtkinlikYS.Model
         public string Yetki { get; set; } = "user";
 
         public byte[] ProfilFotografi { get; set; }
+
+        public decimal Bakiye { get; set; } = 0;
     }
 }

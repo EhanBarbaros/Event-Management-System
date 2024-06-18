@@ -23,6 +23,7 @@ namespace EtkinlikYonetimSistemi
             this.components = new System.ComponentModel.Container();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnKullaniciYonetim = new System.Windows.Forms.Button();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.lbl_baslik = new System.Windows.Forms.Label();
             this.buttonAnaSayfa = new System.Windows.Forms.Button();
@@ -38,7 +39,6 @@ namespace EtkinlikYonetimSistemi
             this.profilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.profilAyarlarıToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cikisYapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnKullaniciYonetim = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -72,6 +72,15 @@ namespace EtkinlikYonetimSistemi
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1280, 80);
             this.panel1.TabIndex = 2;
+            // 
+            // btnKullaniciYonetim
+            // 
+            this.btnKullaniciYonetim.Location = new System.Drawing.Point(827, 23);
+            this.btnKullaniciYonetim.Name = "btnKullaniciYonetim";
+            this.btnKullaniciYonetim.Size = new System.Drawing.Size(111, 37);
+            this.btnKullaniciYonetim.TabIndex = 12;
+            this.btnKullaniciYonetim.Text = "Kullanıcı Yönetimi";
+            this.btnKullaniciYonetim.UseVisualStyleBackColor = true;
             // 
             // pictureBoxLogo
             // 
@@ -150,23 +159,25 @@ namespace EtkinlikYonetimSistemi
             // lblBakiye
             // 
             this.lblBakiye.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblBakiye.Location = new System.Drawing.Point(1011, 30);
+            this.lblBakiye.Location = new System.Drawing.Point(1000, 30);
             this.lblBakiye.Name = "lblBakiye";
-            this.lblBakiye.Size = new System.Drawing.Size(59, 23);
+            this.lblBakiye.Size = new System.Drawing.Size(106, 23);
             this.lblBakiye.TabIndex = 10;
-            this.lblBakiye.Text = "Bakiye: ...";
+            this.lblBakiye.Text = "Bakiye: 0 TL";
             this.lblBakiye.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lblBakiye.Click += new System.EventHandler(this.lblBakiye_Click);
             // 
             // btnBakiyeEkle
             // 
             this.btnBakiyeEkle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBakiyeEkle.Location = new System.Drawing.Point(975, 29);
+            this.btnBakiyeEkle.Location = new System.Drawing.Point(980, 25);
             this.btnBakiyeEkle.Name = "btnBakiyeEkle";
             this.btnBakiyeEkle.Size = new System.Drawing.Size(30, 23);
             this.btnBakiyeEkle.TabIndex = 9;
             this.btnBakiyeEkle.Text = "+";
+            this.btnBakiyeEkle.BringToFront();
             this.btnBakiyeEkle.UseVisualStyleBackColor = true;
+            this.btnBakiyeEkle.Click += new System.EventHandler(this.btnBakiyeEkle_Click);
             // 
             // pictureBox1
             // 
@@ -220,15 +231,6 @@ namespace EtkinlikYonetimSistemi
             this.cikisYapToolStripMenuItem.Text = "Çıkış Yap";
             this.cikisYapToolStripMenuItem.Click += new System.EventHandler(this.btnCikisYap_Click);
             // 
-            // btnKullaniciYonetim
-            // 
-            this.btnKullaniciYonetim.Location = new System.Drawing.Point(827, 23);
-            this.btnKullaniciYonetim.Name = "btnKullaniciYonetim";
-            this.btnKullaniciYonetim.Size = new System.Drawing.Size(111, 37);
-            this.btnKullaniciYonetim.TabIndex = 12;
-            this.btnKullaniciYonetim.Text = "Kullanıcı Yönetimi";
-            this.btnKullaniciYonetim.UseVisualStyleBackColor = true;
-            // 
             // AnaSayfa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,6 +252,7 @@ namespace EtkinlikYonetimSistemi
             this.ResumeLayout(false);
 
         }
+
 
         #endregion
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

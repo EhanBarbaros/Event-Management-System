@@ -14,7 +14,6 @@ namespace EtkinlikYonetimSistemi
             InitializeComponent();
             _etkinlik = etkinlik;
             LoadEtkinlikDetay();
-
         }
         private void LoadEtkinlikDetay()
         {

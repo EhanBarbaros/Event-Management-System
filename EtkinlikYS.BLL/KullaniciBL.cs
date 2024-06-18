@@ -29,11 +29,12 @@ namespace EtkinlikYS.BLL
                     new SqlParameter("@KullaniciAdi", kullanici.KullaniciAdi ?? (object)DBNull.Value),
                     new SqlParameter("@Sifre", kullanici.Sifre ?? (object)DBNull.Value),
                     new SqlParameter("@Yetki", "user"),
-                    new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
+                    new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value),
+                    new SqlParameter("@Bakiye", kullanici.Bakiye)
                 };
 
                 var hlp = Helper.SDP;
-                return hlp.ExecuteNonQuery("Insert into Kullanicilar (Ad, Soyad, Email, Telefon, Adres, DogumTarihi, Cinsiyet, KullaniciAdi, Sifre,Yetki,ProfilFotografi) values (@Ad, @Soyad, @Email, @Telefon, @Adres, @DTarihi, @Cinsiyet, @KullaniciAdi, @Sifre,@Yetki,@ProfilFotografi)", p) > 0;
+                return hlp.ExecuteNonQuery("Insert into Kullanicilar (Ad, Soyad, Email, Telefon, Adres, DogumTarihi, Cinsiyet, KullaniciAdi, Sifre,Yetki,ProfilFotografi,Bakiye) values (@Ad, @Soyad, @Email, @Telefon, @Adres, @DTarihi, @Cinsiyet, @KullaniciAdi, @Sifre,@Yetki,@ProfilFotografi,@Bakiye)", p) > 0;
             }
             catch (SqlException)
             {
@@ -73,9 +74,10 @@ namespace EtkinlikYS.BLL
                         KullaniciAdi = dr["KullaniciAdi"].ToString(),
                         Sifre = dr["Sifre"].ToString(),
                         Yetki = dr["Yetki"].ToString(),
-                        ProfilFotografi = dr["ProfilFotografi"] as byte[]
+                        ProfilFotografi = dr["ProfilFotografi"] as byte[],
+                        Bakiye = dr["Bakiye"] != DBNull.Value ? Convert.ToDecimal(dr["Bakiye"]) : 0
                     };
-                }
+                };
                 dr.Close();
                 return kullanici;
             }
@@ -113,10 +115,11 @@ namespace EtkinlikYS.BLL
             new SqlParameter("@Adres", kullanici.Adres ?? (object)DBNull.Value),
             new SqlParameter("@DTarihi", kullanici.DTarihi ?? (object)DBNull.Value),
             new SqlParameter("@Cinsiyet", kullanici.Cinsiyet ?? (object)DBNull.Value),
-            new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value)
+            new SqlParameter("@ProfilFotografi", kullanici.ProfilFotografi ?? (object)DBNull.Value),
+            new SqlParameter("@Bakiye", kullanici.Bakiye)
         };
 
-                string updateQuery = "UPDATE Kullanicilar SET Ad=@Ad, Soyad=@Soyad, Email=@Email, Telefon=@Telefon, Adres=@Adres, DogumTarihi=@DTarihi, Cinsiyet=@Cinsiyet, ProfilFotografi=@ProfilFotografi";
+                string updateQuery = "UPDATE Kullanicilar SET Ad=@Ad, Soyad=@Soyad, Email=@Email, Telefon=@Telefon, Adres=@Adres, DogumTarihi=@DTarihi, Cinsiyet=@Cinsiyet, ProfilFotografi=@ProfilFotografi,Bakiye=@Bakiye";
 
                 if (!string.IsNullOrEmpty(yeniSifre))
                 {
@@ -133,6 +136,8 @@ namespace EtkinlikYS.BLL
                 {
                     updateQuery += " WHERE KullaniciId=@KullaniciId";
                 }
+
+
 
                 var helper = new Helper();
                 return helper.ExecuteNonQuery(updateQuery, parameters.ToArray()) > 0;

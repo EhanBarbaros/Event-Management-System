@@ -54,10 +54,9 @@ namespace EtkinlikYonetimSistemi
             int labelWidth = lbl_kullaniciAdi.Width;
             int pictureBoxHeight = pictureBox1.Height;
 
-            lbl_kullaniciAdi.Location = new Point(panel1.Width - labelWidth - pictureBox1.Width - 20, 30); 
+            lbl_kullaniciAdi.Location = new Point(panel1.Width - labelWidth - pictureBox1.Width - 20, 30);
             pictureBox1.Location = new Point(lbl_kullaniciAdi.Left - pictureBox1.Width - 5, lbl_kullaniciAdi.Top + (lbl_kullaniciAdi.Height - pictureBoxHeight) / 2);
         }
-
 
         private void lbl_kullaniciAdi_Click(object sender, EventArgs e)
         {
@@ -107,11 +106,82 @@ namespace EtkinlikYonetimSistemi
         private void UpdateUserInfo()
         {
             lbl_kullaniciAdi.Text = _kullanici.KullaniciAdi;
+            lblBakiye.Text = $"Bakiye: {_kullanici.Bakiye:C} TL"; // Kullanıcının bakiyesini TL olarak gösterir
             if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
             {
                 pictureBox1.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
+        }
+
+        private void btnBakiyeEkle_Click(object sender, EventArgs e)
+        {
+            Form bakiyeEkleForm = new Form
+            {
+                Text = "Bakiye Ekle",
+                Size = new Size(250, 150),
+                StartPosition = FormStartPosition.CenterParent,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false
+            };
+
+            Label lblMiktar = new Label
+            {
+                Text = "Miktar:",
+                Location = new Point(10, 20),
+                AutoSize = true
+            };
+
+            TextBox txtMiktar = new TextBox
+            {
+                Location = new Point(60, 20),
+                Width = 150
+            };
+
+            Button btnEkle = new Button
+            {
+                Text = "Ekle",
+                Location = new Point(60, 60),
+                Width = 150
+            };
+
+            btnEkle.Click += (s, args) =>
+            {
+                try
+                {
+                    decimal miktar = Convert.ToDecimal(txtMiktar.Text);
+
+                    if (_kullanici.Bakiye + miktar > 1000)
+                    {
+                        MessageBox.Show("Toplam bakiye 1000 TL'yi aşamaz.");
+                        return;
+                    }
+
+                    _kullanici.Bakiye += miktar;
+                    var kullaniciBL = new KullaniciBL();
+                    if (kullaniciBL.KullaniciGuncelle(_kullanici))
+                    {
+                        MessageBox.Show("Bakiye başarıyla eklendi.");
+                        UpdateUserInfo();
+                        bakiyeEkleForm.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Bakiye ekleme başarısız.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Bir hata oluştu: " + ex.Message);
+                }
+            };
+
+            bakiyeEkleForm.Controls.Add(lblMiktar);
+            bakiyeEkleForm.Controls.Add(txtMiktar);
+            bakiyeEkleForm.Controls.Add(btnEkle);
+
+            bakiyeEkleForm.ShowDialog();
         }
 
         private void btn_Etkinliklerim_Click_1(object sender, EventArgs e)
@@ -145,7 +215,7 @@ namespace EtkinlikYonetimSistemi
 
         private void lblBakiye_Click(object sender, EventArgs e)
         {
-
+            // Placeholder for future functionality
         }
     }
 }
