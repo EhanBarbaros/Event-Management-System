@@ -85,6 +85,52 @@ namespace EtkinlikYS.BLL
             }
         }
 
+        public List<Etkinlik> KullaniciEtkinlikleriGetir(int kullaniciID)
+        {
+            List<Etkinlik> etkinlikler = new List<Etkinlik>();
+            try
+            {
+                SqlParameter[] p = { new SqlParameter("@OlusturanKullaniciID", kullaniciID) };
+
+                var hlp = Helper.SDP;
+                var dr = hlp.ExecuteReader("SELECT * FROM Etkinlikler WHERE OlusturanKullaniciID = @OlusturanKullaniciID", p);
+
+                while (dr.Read())
+                {
+                    Etkinlik etkinlik = new Etkinlik
+                    {
+                        EtkinlikID = Convert.ToInt32(dr["EtkinlikID"]),
+                        EtkinlikAdi = dr["EtkinlikAdi"].ToString(),
+                        Fiyat = dr["Fiyat"].ToString(),
+                        EtkinlikTuru = dr["EtkinlikTuru"].ToString(),
+                        ToplamKontejan = Convert.ToInt32(dr["ToplamKontejan"]),
+                        MevcutKontejan = Convert.ToInt32(dr["MevcutKontejan"]),
+                        EtkinlikTarihi = Convert.ToDateTime(dr["EtkinlikTarihi"]),
+                        EtkinlikYeri = dr["EtkinlikYeri"].ToString(),
+                        Aciklama = dr["Aciklama"].ToString(),
+                        Resim = dr["Resim"] as byte[],
+                        OlusturanKullaniciID = Convert.ToInt32(dr["OlusturanKullaniciID"])
+                    };
+                    etkinlikler.Add(etkinlik);
+                }
+                dr.Close();
+                return etkinlikler;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                Helper.SDP.DisposeEt();
+            }
+        }
+
+
     }
 
 }

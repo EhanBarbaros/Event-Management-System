@@ -6,16 +6,31 @@ namespace EtkinlikYonetimSistemi
 {
     public partial class EtkinlikKarti : UserControl
     {
+        public event EventHandler EtkinlikKartiClicked;
         public EtkinlikKarti()
         {
             InitializeComponent();
+            RegisterClickEvents(this);
+
+        }
+        private void RegisterClickEvents(Control control)
+        {
+            control.Click += OnEtkinlikKartiClicked;
+            foreach (Control childControl in control.Controls)
+            {
+                RegisterClickEvents(childControl);
+            }
+        }
+        private void OnEtkinlikKartiClicked(object sender, EventArgs e)
+        {
+            EtkinlikKartiClicked?.Invoke(this, e);
         }
 
         public void SetEtkinlikBilgileri(string etkinlikAdi, string fiyat, string kontejan, string mevcutKatılımcı, string etkinlikTuru, byte[] resim)
         {
             lblEtkinlikAdi.Text = etkinlikAdi;
             lblFiyat.Text = fiyat == "0" ? "Ücretsiz" : $"Fiyat: {fiyat} TL";
-            lblKontejan.Text = $"Kontejan: {kontejan}";
+            lblKontejan.Text = $"Kontenjan: {kontejan}";
             lblMevcutKatılımcı.Text = $"Mevcut: {mevcutKatılımcı}";
             lblEtkinlikTuru.Text = etkinlikTuru;
 

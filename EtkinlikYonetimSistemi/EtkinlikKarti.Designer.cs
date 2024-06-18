@@ -38,20 +38,19 @@ namespace EtkinlikYonetimSistemi
             // 
             // lblFiyat
             // 
-            this.lblFiyat.BackColor = System.Drawing.Color.FromArgb(128, 255, 255, 255);
+            this.lblFiyat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblFiyat.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblFiyat.ForeColor = System.Drawing.Color.White;
             this.lblFiyat.Location = new System.Drawing.Point(200, 0);
             this.lblFiyat.Name = "lblFiyat";
             this.lblFiyat.Size = new System.Drawing.Size(100, 30);
             this.lblFiyat.TabIndex = 1;
             this.lblFiyat.Text = "Fiyat";
             this.lblFiyat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblFiyat.BackColor = Color.FromArgb(128, Color.Black);
-            this.lblFiyat.ForeColor = Color.White;
             // 
             // lblEtkinlikAdi
             // 
-            this.lblEtkinlikAdi.BackColor = System.Drawing.Color.FromArgb(200, 0, 0, 0);
+            this.lblEtkinlikAdi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEtkinlikAdi.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblEtkinlikAdi.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
             this.lblEtkinlikAdi.ForeColor = System.Drawing.Color.White;
@@ -64,42 +63,39 @@ namespace EtkinlikYonetimSistemi
             // 
             // lblKontejan
             // 
-            this.lblKontejan.BackColor = System.Drawing.Color.FromArgb(128, 255, 255, 255);
+            this.lblKontejan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblKontejan.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblKontejan.ForeColor = System.Drawing.Color.White;
             this.lblKontejan.Location = new System.Drawing.Point(0, 170);
             this.lblKontejan.Name = "lblKontejan";
             this.lblKontejan.Size = new System.Drawing.Size(150, 30);
             this.lblKontejan.TabIndex = 3;
             this.lblKontejan.Text = "Kontejan";
             this.lblKontejan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblKontejan.BackColor = Color.FromArgb(128, Color.Black);
-            this.lblKontejan.ForeColor = Color.White;
             // 
             // lblMevcutKatılımcı
             // 
-            this.lblMevcutKatılımcı.BackColor = System.Drawing.Color.FromArgb(128, 255, 255, 255);
+            this.lblMevcutKatılımcı.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblMevcutKatılımcı.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblMevcutKatılımcı.ForeColor = System.Drawing.Color.White;
             this.lblMevcutKatılımcı.Location = new System.Drawing.Point(150, 170);
             this.lblMevcutKatılımcı.Name = "lblMevcutKatılımcı";
             this.lblMevcutKatılımcı.Size = new System.Drawing.Size(150, 30);
             this.lblMevcutKatılımcı.TabIndex = 4;
             this.lblMevcutKatılımcı.Text = "Mevcut Katılımcı";
             this.lblMevcutKatılımcı.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.lblMevcutKatılımcı.BackColor = Color.FromArgb(128, Color.Black);
-            this.lblMevcutKatılımcı.ForeColor = Color.White;
             // 
             // lblEtkinlikTuru
             // 
-            this.lblEtkinlikTuru.BackColor = System.Drawing.Color.FromArgb(128, 255, 255, 255);
+            this.lblEtkinlikTuru.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.lblEtkinlikTuru.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
+            this.lblEtkinlikTuru.ForeColor = System.Drawing.Color.White;
             this.lblEtkinlikTuru.Location = new System.Drawing.Point(0, 0);
             this.lblEtkinlikTuru.Name = "lblEtkinlikTuru";
             this.lblEtkinlikTuru.Size = new System.Drawing.Size(150, 30);
             this.lblEtkinlikTuru.TabIndex = 5;
             this.lblEtkinlikTuru.Text = "Etkinlik Türü";
             this.lblEtkinlikTuru.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblEtkinlikTuru.BackColor = Color.FromArgb(128, Color.Black);
-            this.lblEtkinlikTuru.ForeColor = Color.White;
             // 
             // EtkinlikKarti
             // 
