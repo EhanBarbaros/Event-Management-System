@@ -161,6 +161,37 @@ namespace EtkinlikYS.BLL
         }
 
 
+        public bool EtkinligeKatilimEkle(Etkinlik etkinlik, Kullanici kullanici)
+        {
+            try
+            {
+                SqlParameter[] p = {
+                    new SqlParameter("@EtkinlikID", etkinlik.EtkinlikID),
+                    new SqlParameter("@KullaniciID", kullanici.Kullaniciid)
+                };
+
+                var hlp = Helper.SDP;
+                bool result = hlp.ExecuteNonQuery("INSERT INTO EtkinlikKatilim (EtkinlikID, KullaniciID) VALUES (@EtkinlikID, @KullaniciID)", p) > 0;
+
+                if (result)
+                {
+                    result = hlp.ExecuteNonQuery("UPDATE Etkinlikler SET MevcutKontejan = MevcutKontejan + 1 WHERE EtkinlikID = @EtkinlikID", new SqlParameter[] { new SqlParameter("@EtkinlikID", etkinlik.EtkinlikID) }) > 0;
+                }
+
+                return result;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+        }
+
+
+
     }
 
 }

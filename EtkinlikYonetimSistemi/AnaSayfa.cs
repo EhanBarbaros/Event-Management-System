@@ -31,8 +31,22 @@ namespace EtkinlikYonetimSistemi
             {
                 EtkinlikKarti etkinlikKarti = new EtkinlikKarti();
                 etkinlikKarti.SetEtkinlikBilgileri(etkinlik.EtkinlikAdi, etkinlik.Fiyat, etkinlik.ToplamKontejan.ToString(), etkinlik.MevcutKontejan.ToString(), etkinlik.EtkinlikTuru, etkinlik.Resim);
+                etkinlikKarti.EtkinlikKartiClicked += (sender, e) => ShowEtkinlikKatilim(etkinlik);
                 flowLayoutPanel1.Controls.Add(etkinlikKarti);
             }
+        }
+
+        private void ShowEtkinlikKatilim(Etkinlik etkinlik)
+        {
+            EtkinlikKatilimUserControl etkinlikKatilimUserControl = new EtkinlikKatilimUserControl(etkinlik, _kullanici);
+            Form detayForm = new Form
+            {
+                Size = new Size(800, 600),
+                Text = "Etkinlik Detayları"
+            };
+            detayForm.Controls.Add(etkinlikKatilimUserControl);
+            etkinlikKatilimUserControl.Dock = DockStyle.Fill;
+            detayForm.ShowDialog();
         }
 
         private void ShowEtkinlikDetay(Etkinlik etkinlik)
@@ -47,6 +61,23 @@ namespace EtkinlikYonetimSistemi
             etkinlikDetayUC.Dock = DockStyle.Fill;
             detayForm.ShowDialog();
         }
+
+        private void LoadUserEtkinlikler()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            var etkinlikler = _etkinlikBL.KullaniciEtkinlikleriGetir((int)_kullanici.Kullaniciid);
+
+            foreach (var etkinlik in etkinlikler)
+            {
+                EtkinlikKarti etkinlikKarti = new EtkinlikKarti();
+                etkinlikKarti.SetEtkinlikBilgileri(etkinlik.EtkinlikAdi, etkinlik.Fiyat, etkinlik.ToplamKontejan.ToString(), etkinlik.MevcutKontejan.ToString(), etkinlik.EtkinlikTuru, etkinlik.Resim);
+                etkinlikKarti.EtkinlikKartiClicked += (sender, e) => ShowEtkinlikDetay(etkinlik);
+                flowLayoutPanel1.Controls.Add(etkinlikKarti);
+            }
+        }
+
+
+
 
         private void UpdateProfilePicturePosition()
         {
@@ -189,19 +220,7 @@ namespace EtkinlikYonetimSistemi
             LoadUserEtkinlikler();
         }
 
-        private void LoadUserEtkinlikler()
-        {
-            flowLayoutPanel1.Controls.Clear();
-            var etkinlikler = _etkinlikBL.KullaniciEtkinlikleriGetir((int)_kullanici.Kullaniciid);
-
-            foreach (var etkinlik in etkinlikler)
-            {
-                EtkinlikKarti etkinlikKarti = new EtkinlikKarti();
-                etkinlikKarti.SetEtkinlikBilgileri(etkinlik.EtkinlikAdi, etkinlik.Fiyat, etkinlik.ToplamKontejan.ToString(), etkinlik.MevcutKontejan.ToString(), etkinlik.EtkinlikTuru, etkinlik.Resim);
-                etkinlikKarti.EtkinlikKartiClicked += (sender, e) => ShowEtkinlikDetay(etkinlik);
-                flowLayoutPanel1.Controls.Add(etkinlikKarti);
-            }
-        }
+ 
 
         private void buttonAnaSayfa_Click(object sender, EventArgs e)
         {

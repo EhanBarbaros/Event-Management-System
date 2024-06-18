@@ -11,7 +11,7 @@ namespace EtkinlikYS.Model
         public string Fiyat { get; set; }
         public string EtkinlikTuru { get; set; }
         public int ToplamKontejan { get; set; }
-        public int MevcutKontejan { get; set; }
+        public int MevcutKontejan { get; set; } = 0;
         public DateTime EtkinlikTarihi { get; set; }
         public string EtkinlikYeri { get; set; }
         public string Aciklama { get; set; }
