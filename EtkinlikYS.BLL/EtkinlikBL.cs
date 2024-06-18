@@ -131,6 +131,36 @@ namespace EtkinlikYS.BLL
         }
 
 
+        public bool EtkinlikGuncelle(Etkinlik etkinlik)
+        {
+            try
+            {
+                SqlParameter[] p = {
+                    new SqlParameter("@EtkinlikID", etkinlik.EtkinlikID),
+                    new SqlParameter("@EtkinlikAdi", etkinlik.EtkinlikAdi ?? (object)DBNull.Value),
+                    new SqlParameter("@Fiyat", etkinlik.Fiyat ?? (object)DBNull.Value),
+                    new SqlParameter("@EtkinlikTuru", etkinlik.EtkinlikTuru ?? (object)DBNull.Value),
+                    new SqlParameter("@ToplamKontejan", etkinlik.ToplamKontejan),
+                    new SqlParameter("@EtkinlikTarihi", etkinlik.EtkinlikTarihi),
+                    new SqlParameter("@EtkinlikYeri", etkinlik.EtkinlikYeri ?? (object)DBNull.Value),
+                    new SqlParameter("@Aciklama", etkinlik.Aciklama ?? (object)DBNull.Value),
+                    new SqlParameter("@Resim", etkinlik.Resim ?? (object)DBNull.Value)
+                };
+
+                var hlp = Helper.SDP;
+                return hlp.ExecuteNonQuery("UPDATE Etkinlikler SET EtkinlikAdi = @EtkinlikAdi, Fiyat = @Fiyat, EtkinlikTuru = @EtkinlikTuru, ToplamKontejan = @ToplamKontejan, EtkinlikTarihi = @EtkinlikTarihi, EtkinlikYeri = @EtkinlikYeri, Aciklama = @Aciklama, Resim = @Resim WHERE EtkinlikID = @EtkinlikID", p) > 0;
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 
 }

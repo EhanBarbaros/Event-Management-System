@@ -38,6 +38,7 @@ namespace EtkinlikYonetimSistemi
                     this.Hide();
                     anaSayfa.ShowDialog();
                     this.Show();
+                    this.Close();
                 }
                 else
                 {

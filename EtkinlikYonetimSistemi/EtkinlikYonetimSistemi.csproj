@@ -137,6 +137,12 @@
     <Compile Include="EtkinlikDetayUserControl.Designer.cs">
       <DependentUpon>EtkinlikDetayUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="EtkinlikGuncelleUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EtkinlikGuncelleUserControl.Designer.cs">
+      <DependentUpon>EtkinlikGuncelleUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EtkinlikKarti.cs">
       <SubType>UserControl</SubType>
     </Compile>

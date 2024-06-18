@@ -15,7 +15,6 @@ namespace EtkinlikYonetimSistemi
             _etkinlik = etkinlik;
             LoadEtkinlikDetay();
         }
-
         private void LoadEtkinlikDetay()
         {
             lblEtkinlikAdi.Text = $"Etkinkik Adı: {_etkinlik.EtkinlikAdi}";
@@ -40,6 +39,20 @@ namespace EtkinlikYonetimSistemi
             {
                 return Image.FromStream(ms);
             }
+        }
+
+        private void btnBilgiGuncelle_Click_1(object sender, EventArgs e)
+        {
+            EtkinlikGuncelleUserControl etkinlikGuncelleUC = new EtkinlikGuncelleUserControl(_etkinlik);
+            Form guncelleForm = new Form
+            {
+                Size = new Size(400, 700),
+                Text = "Etkinlik Güncelle"
+            };
+            guncelleForm.Controls.Add(etkinlikGuncelleUC);
+            etkinlikGuncelleUC.Dock = DockStyle.Fill;
+            guncelleForm.Show();
+            this.ParentForm?.Close();
         }
     }
 }
