@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using EtkinlikYS.BLL;
 using EtkinlikYS.Model;
@@ -62,8 +63,10 @@ namespace EtkinlikYonetimSistemi
 
         private void LoadKullanicilar()
         {
-            var kullanicilar = _kullaniciBL.KullanicilariGetir();
+            var kullanicilar = _kullaniciBL.KullanicilariGetir().Where(k => k.Yetki != "admin" && k.Yetki != "kurucu").ToList();
             dataGridView.DataSource = kullanicilar;
+            dataGridView.Columns["ProfilFotografi"].Visible = false;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ToggleView();
         }
 
@@ -71,6 +74,7 @@ namespace EtkinlikYonetimSistemi
         {
             var etkinlikler = _etkinlikBL.EtkinlikleriGetir();
             dataGridView.DataSource = etkinlikler;
+            dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ToggleView();
         }
 
@@ -80,6 +84,18 @@ namespace EtkinlikYonetimSistemi
             lblEtkinlikler.Visible = false;
             dataGridView.Visible = true;
             panelButtons.Visible = true;
+        }
+
+        private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex % 2 == 0)
+            {
+                e.CellStyle.BackColor = Color.LightGray;
+            }
+            else
+            {
+                e.CellStyle.BackColor = Color.White;
+            }
         }
     }
 }

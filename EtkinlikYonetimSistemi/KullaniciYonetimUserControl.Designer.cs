@@ -86,6 +86,7 @@
             this.dataGridView.Size = new System.Drawing.Size(800, 400);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Visible = false;
+            this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             // 
             // panelButtons
             // 
@@ -100,7 +101,8 @@
             // 
             // btnKullanicilar
             // 
-            this.btnKullanicilar.Location = new System.Drawing.Point(10, 10);
+            this.btnKullanicilar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnKullanicilar.Location = new System.Drawing.Point(310, 10);
             this.btnKullanicilar.Name = "btnKullanicilar";
             this.btnKullanicilar.Size = new System.Drawing.Size(75, 23);
             this.btnKullanicilar.TabIndex = 0;
@@ -110,7 +112,8 @@
             // 
             // btnEtkinlikler
             // 
-            this.btnEtkinlikler.Location = new System.Drawing.Point(100, 10);
+            this.btnEtkinlikler.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnEtkinlikler.Location = new System.Drawing.Point(410, 10);
             this.btnEtkinlikler.Name = "btnEtkinlikler";
             this.btnEtkinlikler.Size = new System.Drawing.Size(75, 23);
             this.btnEtkinlikler.TabIndex = 1;
