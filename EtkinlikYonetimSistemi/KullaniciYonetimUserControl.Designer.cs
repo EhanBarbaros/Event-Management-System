@@ -1,4 +1,6 @@
-﻿namespace EtkinlikYonetimSistemi
+﻿using System.Windows.Forms;
+
+namespace EtkinlikYonetimSistemi
 {
     partial class KullaniciYonetimUserControl
     {
@@ -87,6 +89,9 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Visible = false;
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
+            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.ReadOnly = true;
             // 
             // panelButtons
             // 

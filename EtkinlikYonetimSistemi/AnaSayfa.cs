@@ -251,7 +251,7 @@ namespace EtkinlikYonetimSistemi
 
         private void LoadUserControl()
         {
-            KullaniciYonetimUserControl kullaniciYonetimUC = new KullaniciYonetimUserControl();
+            KullaniciYonetimUserControl kullaniciYonetimUC = new KullaniciYonetimUserControl(_kullanici);
             flowLayoutPanel1.Controls.Clear();
             kullaniciYonetimUC.Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
             kullaniciYonetimUC.Location = new Point(0, 0);

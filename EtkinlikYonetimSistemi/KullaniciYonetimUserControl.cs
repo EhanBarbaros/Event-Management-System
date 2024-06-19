@@ -13,12 +13,18 @@ namespace EtkinlikYonetimSistemi
     {
         private KullaniciBL _kullaniciBL;
         private EtkinlikBL _etkinlikBL;
+        private Kullanici _currentUser;
 
-        public KullaniciYonetimUserControl()
+        public KullaniciYonetimUserControl(Kullanici currentUser)
         {
             InitializeComponent();
             _kullaniciBL = new KullaniciBL();
             _etkinlikBL = new EtkinlikBL();
+            _currentUser = currentUser;
+            dataGridView.CellFormatting += dataGridView_CellFormatting;
+            dataGridView.CellDoubleClick += dataGridView_CellDoubleClick;
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView.ReadOnly = true;
         }
 
         private void lblKullanicilar_MouseEnter(object sender, EventArgs e)
@@ -63,7 +69,17 @@ namespace EtkinlikYonetimSistemi
 
         private void LoadKullanicilar()
         {
-            var kullanicilar = _kullaniciBL.KullanicilariGetir().Where(k => k.Yetki != "admin" && k.Yetki != "kurucu").ToList();
+            List<Kullanici> kullanicilar;
+            if (_currentUser.Yetki == "kurucu")
+            {
+                // Kurucu, tüm kullanıcıları görebilir
+                kullanicilar = _kullaniciBL.KullanicilariGetir().ToList();
+            }
+            else
+            {
+                // Admin ve diğer kullanıcılar adminleri göremez
+                kullanicilar = _kullaniciBL.KullanicilariGetir().Where(k => k.Yetki != "admin" && k.Yetki != "kurucu").ToList();
+            }
             dataGridView.DataSource = kullanicilar;
             dataGridView.Columns["ProfilFotografi"].Visible = false;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -74,6 +90,7 @@ namespace EtkinlikYonetimSistemi
         {
             var etkinlikler = _etkinlikBL.EtkinlikleriGetir();
             dataGridView.DataSource = etkinlikler;
+            dataGridView.Columns["Resim"].Visible = false;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ToggleView();
         }
@@ -96,6 +113,11 @@ namespace EtkinlikYonetimSistemi
             {
                 e.CellStyle.BackColor = Color.White;
             }
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Çift tıklamayı engellemek için içeriği boş bırakın
         }
     }
 }
