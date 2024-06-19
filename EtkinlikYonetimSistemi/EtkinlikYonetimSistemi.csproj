@@ -179,6 +179,12 @@
     <Compile Include="KayitOl.Designer.cs">
       <DependentUpon>KayitOl.cs</DependentUpon>
     </Compile>
+    <Compile Include="KullaniciYonetimUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KullaniciYonetimUserControl.Designer.cs">
+      <DependentUpon>KullaniciYonetimUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Profil.cs">
       <SubType>Form</SubType>
     </Compile>

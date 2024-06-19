@@ -81,6 +81,7 @@ namespace EtkinlikYonetimSistemi
             this.btnKullaniciYonetim.TabIndex = 12;
             this.btnKullaniciYonetim.Text = "Kullanıcı Yönetimi";
             this.btnKullaniciYonetim.UseVisualStyleBackColor = true;
+            this.btnKullaniciYonetim.Click += new System.EventHandler(this.btnKullaniciYonetim_Click);
             // 
             // pictureBoxLogo
             // 
@@ -175,7 +176,6 @@ namespace EtkinlikYonetimSistemi
             this.btnBakiyeEkle.Size = new System.Drawing.Size(30, 23);
             this.btnBakiyeEkle.TabIndex = 9;
             this.btnBakiyeEkle.Text = "+";
-            this.btnBakiyeEkle.BringToFront();
             this.btnBakiyeEkle.UseVisualStyleBackColor = true;
             this.btnBakiyeEkle.Click += new System.EventHandler(this.btnBakiyeEkle_Click);
             // 

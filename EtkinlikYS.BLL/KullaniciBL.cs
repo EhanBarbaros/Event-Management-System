@@ -153,6 +153,53 @@ namespace EtkinlikYS.BLL
         }
 
 
+        public List<Kullanici> KullanicilariGetir()
+        {
+            List<Kullanici> kullanicilar = new List<Kullanici>();
+            try
+            {
+                var hlp = Helper.SDP;
+                var dr = hlp.ExecuteReader("SELECT * FROM Kullanicilar", null);
+
+                while (dr.Read())
+                {
+                    Kullanici kullanici = new Kullanici
+                    {
+                        Kullaniciid = Convert.ToInt32(dr["KullaniciId"]),
+                        Ad = dr["Ad"].ToString(),
+                        Soyad = dr["Soyad"].ToString(),
+                        Email = dr["Email"].ToString(),
+                        Telefon = dr["Telefon"].ToString(),
+                        Adres = dr["Adres"].ToString(),
+                        DTarihi = dr["DogumTarihi"].ToString(),
+                        Cinsiyet = dr["Cinsiyet"].ToString(),
+                        KullaniciAdi = dr["KullaniciAdi"].ToString(),
+                        Sifre = dr["Sifre"].ToString(),
+                        Yetki = dr["Yetki"].ToString(),
+                        ProfilFotografi = dr["ProfilFotografi"] as byte[],
+                        Bakiye = dr["Bakiye"] != DBNull.Value ? Convert.ToDecimal(dr["Bakiye"]) : 0
+                    };
+                    kullanicilar.Add(kullanici);
+                }
+                dr.Close();
+                return kullanicilar;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+            finally
+            {
+                Helper.SDP.DisposeEt();
+            }
+        }
+
+
+
 
     }
 }

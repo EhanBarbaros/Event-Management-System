@@ -21,6 +21,11 @@ namespace EtkinlikYonetimSistemi
             LoadEtkinlikler();
             UpdateUserInfo();
             UpdateProfilePicturePosition();
+
+            if (_kullanici.Yetki != "admin" && _kullanici.Yetki != "kurucu")
+            {
+                btnKullaniciYonetim.Visible = false;
+            }
         }
 
         public void LoadEtkinlikler()
@@ -238,5 +243,22 @@ namespace EtkinlikYonetimSistemi
         private void lblBakiye_Click(object sender, EventArgs e)
         {
         }
+
+        private void btnKullaniciYonetim_Click(object sender, EventArgs e)
+        {
+            LoadUserControl();
+        }
+
+        private void LoadUserControl()
+        {
+            KullaniciYonetimUserControl kullaniciYonetimUC = new KullaniciYonetimUserControl();
+            flowLayoutPanel1.Controls.Clear();
+            kullaniciYonetimUC.Size = new Size(flowLayoutPanel1.Width, flowLayoutPanel1.Height);
+            kullaniciYonetimUC.Location = new Point(0, 0);
+            flowLayoutPanel1.Controls.Add(kullaniciYonetimUC);
+            kullaniciYonetimUC.BringToFront();
+            kullaniciYonetimUC.Visible = true;
+        }
+
     }
 }
