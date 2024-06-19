@@ -10,12 +10,14 @@ namespace EtkinlikYonetimSistemi
     {
         private Etkinlik _etkinlik;
         private Kullanici _kullanici;
+        private AnaSayfa _anaSayfa;
 
-        public EtkinlikKatilimUserControl(Etkinlik etkinlik, Kullanici kullanici)
+        public EtkinlikKatilimUserControl(Etkinlik etkinlik, Kullanici kullanici, AnaSayfa anaSayfa)
         {
             InitializeComponent();
             _etkinlik = etkinlik;
             _kullanici = kullanici;
+            _anaSayfa = anaSayfa;
             LoadEtkinlikBilgileri();
         }
 
@@ -51,29 +53,43 @@ namespace EtkinlikYonetimSistemi
 
         private void btnYerAyirt_Click(object sender, EventArgs e)
         {
-            if (_etkinlik.Fiyat == "0")
+            try
             {
-                var result = MessageBox.Show("Katılmak istiyor musunuz?", "Ücretsiz Etkinlik", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
+                if (_etkinlik.Fiyat == "0")
                 {
-                    KatilimIslemi();
-                }
-            }
-            else
-            {
-                var result = MessageBox.Show($"{_etkinlik.Fiyat} TL ücreti bakiyenizden düşecektir. Onaylıyor musunuz?", "Ücretli Etkinlik", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    if (_kullanici.Bakiye >= Convert.ToDecimal(_etkinlik.Fiyat))
+                    var result = MessageBox.Show("Katılmak istiyor musunuz?", "Ücretsiz Etkinlik", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
                     {
-                        _kullanici.Bakiye -= Convert.ToDecimal(_etkinlik.Fiyat);
                         KatilimIslemi();
                     }
-                    else
+                }
+                else
+                {
+                    var result = MessageBox.Show($"{_etkinlik.Fiyat} TL ücreti bakiyenizden düşecektir. Onaylıyor musunuz?", "Ücretli Etkinlik", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
                     {
-                        MessageBox.Show("Yetersiz bakiye.");
+                        decimal etkinlikFiyati;
+                        if (decimal.TryParse(_etkinlik.Fiyat, out etkinlikFiyati))
+                        {
+                            if (_kullanici.Bakiye >= etkinlikFiyati)
+                            {
+                                KatilimIslemi();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Yetersiz bakiye.");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Geçersiz etkinlik fiyatı.");
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Bir hata oluştu: " + ex.Message);
             }
         }
 
@@ -85,6 +101,8 @@ namespace EtkinlikYonetimSistemi
                 MessageBox.Show("Etkinliğe başarıyla katıldınız.");
                 _etkinlik.MevcutKontejan++;
                 LoadEtkinlikBilgileri();
+                _anaSayfa.UpdateUserInfo();
+                _anaSayfa.LoadEtkinlikler();
             }
             else
             {

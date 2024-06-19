@@ -21,7 +21,6 @@ namespace EtkinlikYonetimSistemi
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            //Kapama butonuna tıklandığında çalışacak fonksiyon.
             this.Close();
         }
 
@@ -53,8 +52,6 @@ namespace EtkinlikYonetimSistemi
 
         private void btn_GirisFormKayitOl_Click(object sender, EventArgs e)
         {
-            //Kayıt ol sayfasına yönlendirmek i çin bir değişken tanımlandı.
-            //İlk olarak Kayıt ol formunu açıyoruz. Sonra arka planda kalan formu gizliyoruz ve eğer kayıt formu kapatılırsa giriş formunu tekrar görünür yapıyrouz
             Form frm = new KayitOl();
             frm.Show();
             this.Hide();

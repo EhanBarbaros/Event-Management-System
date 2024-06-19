@@ -11,6 +11,7 @@ namespace EtkinlikYonetimSistemi
     {
         private Kullanici _kullanici;
         private EtkinlikBL _etkinlikBL;
+        
 
         public AnaSayfa(Kullanici kullanici)
         {
@@ -22,7 +23,7 @@ namespace EtkinlikYonetimSistemi
             UpdateProfilePicturePosition();
         }
 
-        private void LoadEtkinlikler()
+        public void LoadEtkinlikler()
         {
             flowLayoutPanel1.Controls.Clear();
             var etkinlikler = _etkinlikBL.EtkinlikleriGetir();
@@ -38,7 +39,7 @@ namespace EtkinlikYonetimSistemi
 
         private void ShowEtkinlikKatilim(Etkinlik etkinlik)
         {
-            EtkinlikKatilimUserControl etkinlikKatilimUserControl = new EtkinlikKatilimUserControl(etkinlik, _kullanici);
+            EtkinlikKatilimUserControl etkinlikKatilimUserControl = new EtkinlikKatilimUserControl(etkinlik, _kullanici,this);
             Form detayForm = new Form
             {
                 Size = new Size(800, 600),
@@ -111,6 +112,8 @@ namespace EtkinlikYonetimSistemi
 
         private void btnCikisYap_Click(object sender, EventArgs e)
         {
+            form_ilk girisYapForm = new form_ilk();
+            girisYapForm.Show();
             this.Close();
         }
 
@@ -134,10 +137,10 @@ namespace EtkinlikYonetimSistemi
             }
         }
 
-        private void UpdateUserInfo()
+        public void UpdateUserInfo()
         {
             lbl_kullaniciAdi.Text = _kullanici.KullaniciAdi;
-            lblBakiye.Text = $"Bakiye: {_kullanici.Bakiye:C} TL"; // Kullanıcının bakiyesini TL olarak gösterir
+            lblBakiye.Text = $"Bakiye: {_kullanici.Bakiye:C} TL"; 
             if (_kullanici.ProfilFotografi != null && _kullanici.ProfilFotografi.Length > 0)
             {
                 pictureBox1.Image = ByteArrayToImage(_kullanici.ProfilFotografi);
@@ -234,7 +237,6 @@ namespace EtkinlikYonetimSistemi
 
         private void lblBakiye_Click(object sender, EventArgs e)
         {
-            // Placeholder for future functionality
         }
     }
 }
