@@ -11,6 +11,7 @@ namespace EtkinlikYonetimSistemi
     {
         private Kullanici _kullanici;
         private KullaniciBL _kullaniciBL;
+        private Kullanici _currentUser;
 
         public Profil(Kullanici kullanici)
         {
@@ -19,6 +20,40 @@ namespace EtkinlikYonetimSistemi
             _kullaniciBL = new KullaniciBL();
             ProfilBilgileriniYukle();
             StartPosition = FormStartPosition.CenterParent;
+        }
+
+        public Profil(Kullanici kullanici, Kullanici currentUser) : this(kullanici)
+        {
+            _currentUser = currentUser;
+            if (currentUser.Yetki == "kurucu")
+            {
+                InitializeAdminButtons();
+                ConfigureAdminButtons();
+            }
+            // Profili Düzenle, Resim Yükle ve Resim Kaydet butonlarını gizle
+            btnDuzenle.Visible = false;
+            btnResimYukle.Visible = false;
+            btnResimKaydet.Visible = false;
+        }
+
+        private void InitializeAdminButtons()
+        {
+            btnSil.Visible = true;
+            btnYetki.Visible = true;
+        }
+
+        private void ConfigureAdminButtons()
+        {
+            if (_kullanici.Yetki == "admin")
+            {
+                btnYetki.Text = "Yetkiyi Kaldır";
+                btnYetki.Click += BtnYetkiKaldir_Click;
+            }
+            else
+            {
+                btnYetki.Text = "Yetkilendir";
+                btnYetki.Click += BtnYetkilendir_Click;
+            }
         }
 
         private void ProfilBilgileriniYukle()
@@ -67,14 +102,11 @@ namespace EtkinlikYonetimSistemi
                 {
                     MessageBox.Show("Profil güncelleme sırasında bir hata oluştu.");
                 }
-
             }
             else
             {
                 MessageBox.Show("Lütfen bir resim yükleyin.");
             }
-
-
         }
 
         private byte[] ImageToByteArray(Image image)
@@ -91,6 +123,48 @@ namespace EtkinlikYonetimSistemi
             using (var ms = new MemoryStream(byteArray))
             {
                 return Image.FromStream(ms);
+            }
+        }
+
+        private void BtnSil_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Kullanıcıyı silmek istediğinizden emin misiniz?", "Kullanıcı Sil", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                if (_kullaniciBL.KullaniciSil((int)_kullanici.Kullaniciid))
+                {
+                    MessageBox.Show("Kullanıcı silindi.");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Kullanıcı silme sırasında bir hata oluştu.");
+                }
+            }
+        }
+
+        private void BtnYetkiKaldir_Click(object sender, EventArgs e)
+        {
+            if (_kullaniciBL.KullaniciYetkiGuncelle((int)_kullanici.Kullaniciid, "user"))
+            {
+                MessageBox.Show("Yetki kaldırıldı.");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Yetki kaldırma sırasında bir hata oluştu.");
+            }
+        }
+
+        private void BtnYetkilendir_Click(object sender, EventArgs e)
+        {
+            if (_kullaniciBL.KullaniciYetkiGuncelle((int)_kullanici.Kullaniciid, "admin"))
+            {
+                MessageBox.Show("Kullanıcı yetkilendirildi.");
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Yetkilendirme sırasında bir hata oluştu.");
             }
         }
     }

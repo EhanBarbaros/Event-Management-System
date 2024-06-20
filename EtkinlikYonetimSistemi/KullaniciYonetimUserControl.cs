@@ -1,11 +1,10 @@
-﻿using System;
+﻿using EtkinlikYS.BLL;
+using EtkinlikYS.Model;
+using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using EtkinlikYS.BLL;
-using EtkinlikYS.Model;
 
 namespace EtkinlikYonetimSistemi
 {
@@ -69,19 +68,10 @@ namespace EtkinlikYonetimSistemi
 
         private void LoadKullanicilar()
         {
-            List<Kullanici> kullanicilar;
-            if (_currentUser.Yetki == "kurucu")
-            {
-                // Kurucu, tüm kullanıcıları görebilir
-                kullanicilar = _kullaniciBL.KullanicilariGetir().ToList();
-            }
-            else
-            {
-                // Admin ve diğer kullanıcılar adminleri göremez
-                kullanicilar = _kullaniciBL.KullanicilariGetir().Where(k => k.Yetki != "admin" && k.Yetki != "kurucu").ToList();
-            }
+            var kullanicilar = _kullaniciBL.KullanicilariGetir().Where(k => _currentUser.Yetki == "kurucu" || (k.Yetki != "admin" && k.Yetki != "kurucu")).ToList();
             dataGridView.DataSource = kullanicilar;
             dataGridView.Columns["ProfilFotografi"].Visible = false;
+            dataGridView.Columns["Sifre"].Visible = false;
             dataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ToggleView();
         }
@@ -117,7 +107,42 @@ namespace EtkinlikYonetimSistemi
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Çift tıklamayı engellemek için içeriği boş bırakın
+            if (e.RowIndex >= 0)
+            {
+                if (dataGridView.DataSource is List<Kullanici>)
+                {
+                    var kullanici = ((List<Kullanici>)dataGridView.DataSource)[e.RowIndex];
+                    var profilDuzenleForm = new Profil (kullanici, _currentUser);
+                    profilDuzenleForm.FormClosed += ProfilDuzenleForm_FormClosed;
+                    profilDuzenleForm.ShowDialog();
+                }
+                else if (dataGridView.DataSource is List<Etkinlik>)
+                {
+                    var etkinlik = ((List<Etkinlik>)dataGridView.DataSource)[e.RowIndex];
+                    var etkinlikDetayForm = new EtkinlikDetayUserControl(etkinlik);
+                    var detayForm = new Form
+                    {
+                        Size = new Size(650, 450),
+                        Text = "Etkinlik Detayları",
+                        StartPosition = FormStartPosition.CenterParent
+                    };
+                    detayForm.Controls.Add(etkinlikDetayForm);
+                    etkinlikDetayForm.Dock = DockStyle.Fill;
+                    detayForm.ShowDialog();
+                }
+            }
+        }
+
+        private void ProfilDuzenleForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (dataGridView.DataSource is List<Kullanici>)
+            {
+                LoadKullanicilar();
+            }
+            else if (dataGridView.DataSource is List<Etkinlik>)
+            {
+                LoadEtkinlikler();
+            }
         }
     }
 }

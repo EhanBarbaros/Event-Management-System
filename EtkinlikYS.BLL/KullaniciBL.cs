@@ -198,6 +198,51 @@ namespace EtkinlikYS.BLL
             }
         }
 
+        public bool KullaniciSil(int kullaniciId)
+        {
+            try
+            {
+                var hlp = Helper.SDP;
+                SqlParameter[] p = {
+                    new SqlParameter("@KullaniciId", kullaniciId)
+                };
+
+                var query = "DELETE FROM Kullanicilar WHERE KullaniciId = @KullaniciId";
+                return hlp.ExecuteNonQuery(query, p) > 0;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+        }
+
+        public bool KullaniciYetkiGuncelle(int kullaniciId, string yeniYetki)
+        {
+            try
+            {
+                var helper = new Helper();
+                SqlParameter[] p = {
+            new SqlParameter("@KullaniciId", kullaniciId),
+            new SqlParameter("@Yetki", yeniYetki)
+        };
+
+                string query = "UPDATE Kullanicilar SET Yetki = @Yetki WHERE KullaniciId = @KullaniciId";
+                return helper.ExecuteNonQuery(query, p) > 0;
+            }
+            catch (SqlException ex)
+            {
+                throw new Exception("Veritabanı hatası: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Bir hata oluştu: " + ex.Message);
+            }
+        }
+
 
 
 

@@ -1,10 +1,15 @@
-﻿using System.Windows.Forms;
-
-namespace EtkinlikYonetimSistemi
+﻿namespace EtkinlikYonetimSistemi
 {
     partial class KullaniciYonetimUserControl
     {
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.Label lblKullanicilar;
+        private System.Windows.Forms.Label lblEtkinlikler;
+        private System.Windows.Forms.DataGridView dataGridView;
+        private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.Button btnKullanicilar;
+        private System.Windows.Forms.Button btnEtkinlikler;
+        private System.Windows.Forms.SplitContainer splitContainer1;
 
         protected override void Dispose(bool disposing)
         {
@@ -14,8 +19,6 @@ namespace EtkinlikYonetimSistemi
             }
             base.Dispose(disposing);
         }
-
-        #region Component Designer generated code
 
         private void InitializeComponent()
         {
@@ -90,7 +93,7 @@ namespace EtkinlikYonetimSistemi
             this.dataGridView.Visible = false;
             this.dataGridView.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView_CellFormatting);
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.ReadOnly = true;
             // 
             // panelButtons
@@ -140,17 +143,6 @@ namespace EtkinlikYonetimSistemi
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
-
-        #endregion
-
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label lblKullanicilar;
-        private System.Windows.Forms.Label lblEtkinlikler;
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.Panel panelButtons;
-        private System.Windows.Forms.Button btnKullanicilar;
-        private System.Windows.Forms.Button btnEtkinlikler;
     }
 }

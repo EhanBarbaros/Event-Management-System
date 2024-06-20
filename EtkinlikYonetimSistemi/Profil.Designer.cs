@@ -15,6 +15,8 @@
         private System.Windows.Forms.Button btnResimYukle;
         private System.Windows.Forms.Button btnResimKaydet;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button btnSil;
+        private System.Windows.Forms.Button btnYetki;
 
         protected override void Dispose(bool disposing)
         {
@@ -39,6 +41,8 @@
             this.btnResimYukle = new System.Windows.Forms.Button();
             this.btnResimKaydet = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnSil = new System.Windows.Forms.Button();
+            this.btnYetki = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfil)).BeginInit();
             this.SuspendLayout();
             // 
@@ -145,6 +149,25 @@
             this.btnResimKaydet.UseVisualStyleBackColor = true;
             this.btnResimKaydet.Click += new System.EventHandler(this.btnResimKaydet_Click);
             // 
+            // btnSil
+            // 
+            this.btnSil.Location = new System.Drawing.Point(250, 250);
+            this.btnSil.Name = "btnSil";
+            this.btnSil.Size = new System.Drawing.Size(150, 23);
+            this.btnSil.TabIndex = 11;
+            this.btnSil.Text = "Sil";
+            this.btnSil.UseVisualStyleBackColor = true;
+            this.btnSil.Click += new System.EventHandler(this.BtnSil_Click);
+            // 
+            // btnYetki
+            // 
+            this.btnYetki.Location = new System.Drawing.Point(250, 280);
+            this.btnYetki.Name = "btnYetki";
+            this.btnYetki.Size = new System.Drawing.Size(150, 23);
+            this.btnYetki.TabIndex = 12;
+            this.btnYetki.Text = "Yetkilendir";
+            this.btnYetki.UseVisualStyleBackColor = true;
+            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
@@ -153,7 +176,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 281);
+            this.ClientSize = new System.Drawing.Size(434, 311);
+            this.Controls.Add(this.btnYetki);
+            this.Controls.Add(this.btnSil);
             this.Controls.Add(this.btnResimKaydet);
             this.Controls.Add(this.btnResimYukle);
             this.Controls.Add(this.btnDuzenle);
